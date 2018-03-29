@@ -1,0 +1,29 @@
+% Main tex file for Research Project
+% Author: Javier Reyes
+
+% Long document, font size 12, two sides paper
+\documentclass{report}
+	
+	% Encoding format
+	\usepackage[utf8]{inputenc}
+	
+	% Page sizes, margins, adjust for binding
+	\usepackage[a4paper,
+							width=150mm,
+							top=25mm,
+							bottom=25mm,
+							bindingoffset=6mm]{geometry}
+	
+	% References management
+	\usepackage[backend=biber,
+							bibstyle=ieee,
+							citestyle=alphabetic]{biblatex}
+	\bibliography{references.bib}
+	
+	% Start of the document
+	\begin{document}
+	
+	% Insert table of contents
+	\tableofcontents
+	
+	\end{document}

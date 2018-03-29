@@ -1,0 +1,36 @@
+@startuml
+start
+
+:InitPlatform();
+
+while (endProgram?) is (no)
+  :deviceSelection;
+  :prioritySelection;
+  :modeSelection;
+  if (publisher) then (yes)
+    :loopFlag;
+    :read sampleTime;
+    :CAN[0]=1;
+  elseif (off) then (yes)
+    :CAN[0]=0;
+  elseif (oneTimeData) then (yes)
+    :CAN[0]=2;
+  endif
+
+  :canConfig();
+  :txBuffer load;
+
+  :canSend();
+
+  while (loopFlag) is (yes)
+    :canRecv();
+    :rxBuffer load;
+    :print rxBuffer;
+  endwhile (no)
+
+endwhile (yes)
+
+:cleanPlatform();
+
+stop
+@enduml

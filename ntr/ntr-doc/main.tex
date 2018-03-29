@@ -1,0 +1,116 @@
+% Main tex file
+% New Trends in Research
+% Author: Javier Reyes
+
+% Long document, font size 12, two sides paper
+\documentclass[12pt, twoside]{report}
+
+\usepackage{blindtext} % TEMP: temporal
+
+% Encoding format
+\usepackage[utf8]{inputenc}
+
+% Page sizes, margins, adjust for binding
+\usepackage[a4paper,
+						width=150mm,
+						top=30mm,
+						bottom=30mm,
+						bindingoffset=6mm]{geometry}
+
+% Adjust space between paragraphs
+\setlength{\parskip}{1.5em}
+% Adjust paragraph indentation
+\setlength{\parindent}{0em}
+
+% Header manipulation
+% Title in header right odd - left even
+% Page number in left odd - right even
+% Chapter number and name in right odd
+% Section number and name in left even
+% Line rulers of 2pt up and 1pt down
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[RE]{New trends in research}
+\fancyhead[LO]{Javier Reyes}
+\fancyfoot{}
+\fancyfoot[LO, RE]{\thepage}
+\fancyfoot[RO]{\footnotesize{\rightmark}}
+\fancyfoot[LE]{\footnotesize{\leftmark}}
+\renewcommand{\headrulewidth}{2pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Chapters and sections adjustment
+\usepackage{titlesec}
+\titleformat
+{\chapter} % command
+[display] % shape
+{\bfseries\Huge} % format
+{\chaptertitlename \thechapter} % label
+{-1ex} % sep
+{
+    \rule{\textwidth}{1pt}
+    \vspace{1ex}
+    \centering
+} % before-code
+[
+\vspace{-4ex}
+\rule{\textwidth}{0.5pt}
+\vspace{0.5ex}
+] % after-code
+
+% Modify the space of the chapter title
+\titlespacing*{\chapter}{0pt}{-1em}{0pt}
+
+\titleformat
+{\section} % command
+[hang] % shape
+{\Large\bfseries} % format
+{\thesection} % label
+{0.5em} % sep
+{} % before-code
+[\vspace{-0.5em}] % after-code
+
+% Graphics package to deal with images, specify image folder
+\usepackage{graphicx}
+\graphicspath{{img/}}
+% Required for the placement specifier
+\usepackage{float}
+
+% References management
+\usepackage[backend=biber,
+						bibstyle=ieee,
+						autocite=footnote,
+						citestyle=numeric]{biblatex}
+\bibliography{references.bib}
+
+
+% Required to use color
+\usepackage{xcolor}
+% Formated code insertion package
+% Defines language, tab, size, numbering, coloring, ...
+\usepackage{listings}
+
+% For equations
+\usepackage{amsmath}
+
+% Start of the document
+\begin{document}
+
+% Inserts title page from external file
+\input{chapters/titlepage}
+
+% Insert table of contents
+\tableofcontents
+
+% Content chapters
+\input{chapters/chapter1}
+\input{chapters/chapter2}
+\input{chapters/chapter3}
+\input{chapters/chapter4}
+
+% Insert the referenced bibliography
+\printbibliography
+\nocite{*}
+
+\end{document}

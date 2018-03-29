@@ -1,0 +1,102 @@
+% Main tex file for the New Trends in Research Colloquium
+% Author: Javier Reyes
+
+\documentclass{beamer}
+
+\usetheme{metropolis}
+\usefonttheme[onlymath]{serif}
+\metroset{subsectionpage=progressbar, sectionpage=none, block=fill}
+
+% Colors for block environments
+% \setbeamercolor{block title default}{use=default text,
+% 		fg=default text.fg,
+% 		bg=default text.bg!80!default text.fg}
+% \setbeamercolor{block body default}{use={block title default, default text},
+% 		fg=default text.fg,
+% 		bg=block title default.bg!90!default text.bg}
+% \setbeamercolor{block title alerted}{use=alerted text,
+% 		fg=alerted text.fg,
+% 		bg=alerted text.bg!80!alerted text.fg}
+% \setbeamercolor{block body alerted}{use={block title alerted, alerted text},
+% 		fg=alerted text.fg,
+% 		bg=block title alerted.bg!90!alerted text.bg}
+% \setbeamercolor{block title example}{use=example text,
+% 		fg=example text.fg,
+% 		bg=example text.bg!80!example text.fg}
+% \setbeamercolor{block body example}{use={block title example, example text},
+% 		fg=example text.fg,
+% 		bg=block title example.bg!90!example text.bg}
+
+% Encoding format
+\usepackage[utf8]{inputenc}
+
+% References management
+\usepackage[backend=biber,
+						citestyle=numeric]{biblatex}
+\bibliography{references.bib}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+% Position images
+\usepackage[export]{adjustbox}
+
+% Math functions
+\usepackage{amsmath}
+
+% Required to insert images
+\usepackage{graphicx}
+\graphicspath{{pres-img/}}
+
+% Required to use color
+\usepackage{color}
+
+% Formated code insertion package
+\usepackage{listings}
+
+% Set line spaces
+\usepackage{setspace}
+
+\usepackage{hanging}
+\setbeamertemplate{footnote}{
+  \hangpara{2em}{1}
+  \makebox[2em][l]{\insertfootnotemark}\scriptsize\insertfootnotetext\par
+}
+
+\title{Zynqberry Operator Accelerator Plus}
+\subtitle{New Trends in Research}
+\author{Javier Ignacio Reyes Garcia \\
+	\tiny{\texttt{javier.reyesgarcia001@stud.fh-dortmund.de}}}
+\institute{Dortmund University of Applied Sciences and Arts}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}
+	\setbeamertemplate{section in toc}[circle]
+	\setbeamertemplate{subsection in toc}[ball unnumbered]
+	\tableofcontents
+\end{frame}
+
+\setbeamertemplate{frame footer}{\tiny{New Trends in Research} \hspace{2cm} \tiny{Dortmund University of Applied Sciences and Arts}}
+
+\section{DAEbot}
+\input{pres-sections/section1}
+
+\section{Zynqberry SBC}
+\input{pres-sections/section2}
+
+\section{Vivado Design Suite}
+\input{pres-sections/section3}
+
+\section{Application}
+\input{pres-sections/section4}
+
+% References
+\begin{frame}[allowframebreaks]{References}
+	\printbibliography
+	\nocite{*}
+\end{frame}
+
+\end{document}
+	

@@ -1,0 +1,33 @@
+@startuml
+
+Zynq -> Host: print deviceSelection menu
+Host --> Zynq: user selection [0-9]
+
+Zynq -> Host: print prioritySelection menu 
+Host --> Zynq: user selection [0-3]
+
+Zynq -> Host: print modeSelection menu
+Host --> Zynq: user selection [0-2]
+
+alt publisher mode
+  Zynq -> Host: print sampleTimeUnits menu
+  Host --> Zynq: user selection [0-3]
+  Zynq -> Host: print sampleTime menu
+  Host --> Zynq: user selection [0-255]
+end
+
+Zynq -> CANdevice: selected CAN frame
+note right
+  This device can be
+  any of the controller
+  layer devices
+end note
+alt oneTime data
+  CANdevice --> Zynq: requested data frame
+else publisher mode
+  loop
+    CANdevice --> Zynq: requested data frame
+  end
+end
+
+@enduml
