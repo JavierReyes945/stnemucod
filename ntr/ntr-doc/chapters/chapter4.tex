@@ -73,7 +73,7 @@ In order to ease the configuration, a convenient tool is provided online\footnot
 
 The values proposed by the tool were tested, and proved succesful CAN communication, after several calculated combinations. For further changes in the DAEbot network speed, it is recomended to update the register values with help of this tool as well.
 
-\lstinputlisting[language=C, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={\#define}, firstline=41, lastline=56, breaklines=true, numbers=left]{../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
+\lstinputlisting[language=C, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={\#define}, firstline=41, lastline=56, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
 
 \section{Final Application}
 
@@ -99,7 +99,7 @@ The communication between the host computer, the Zynberry device, and any of the
 
 At the moment of the development, only a group of devices where enabled, but further devices can be easily included in the application, by verifying that the identifier (8-bit, defined in the table available in the Wiki) is correctly located in the data array \texttt{devices}, and adding the option in the menu.
 
-\lstinputlisting[language=C, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, firstline=79, lastline=91, breaklines=true, numbers=left]{../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
+\lstinputlisting[language=C, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, firstline=79, lastline=91, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
 
 The application running on the device, in communication with the DAEbot controllers for the available sensors can be seen as follows:
 
