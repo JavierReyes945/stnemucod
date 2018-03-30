@@ -81,6 +81,7 @@ vivado &
 				\item Create a new Block Design.
 				\item Add the Zynq7 IP Core.
 				\item Add/create any other necesary IP Core.
+				\item Configure the IP Core.
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -89,26 +90,42 @@ vivado &
 \begin{frame}
 	\frametitle{Hardware Project}
 	\begin{columns}
-		\begin{column}{0.4\textwidth}
+		\begin{column}{0.5\textwidth}
 			\begin{figure}
-				\includegraphics[width=\textwidth]{project-device.png}
-				\caption{Vivado project - Device selection.}\label{fig:project-device}
+				\includegraphics[width=\textwidth]{can-enable.png}
+				\caption{Vivado project - IP Core configuration.}\label{fig:can-enable}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Configure the IP Core.
-				\begin{itemize}
-					\item Apply the configuration in the TCL script, provided by the manufacturer.
-					\item Ensure that all the required peripherals are enabled (CAN, USB, etc).
-					\item Add/create any other necesary IP Core.
-					\item Configure the IP Core.
-				\end{itemize}
+				\item Apply the configuration in the TCL script, provided by the manufacturer.
+				\item Enable all the required peripherals (CAN, USB, etc).
+				\item Route all the enabled modules to an available MIO pin or via EMIO.
+				\item Configure the frequency for the CAN REF CLK signal (80 MHz).
 			\end{itemize}
 		\end{column}
 	\end{columns}
 \end{frame}
 
+\begin{frame}
+	\frametitle{Hardware Project}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{ip-core.png}
+				\caption{Vivado project - Block Design.}\label{fig:ip-core}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Run the Block Automation wizard.
+				\item Run the Connection Automation wizard.
+				\item Set all signals that will be routed to a physical pin external (Make external).
+				\item Generate an HDL wrapper for the Block Design.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
 
 % \lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
 

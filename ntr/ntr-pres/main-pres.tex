@@ -61,6 +61,8 @@
   \makebox[2em][l]{\insertfootnotemark}\scriptsize\insertfootnotetext\par
 }
 
+\usepackage{multicol}
+
 \title{Zynqberry Operator Accelerator Plus}
 \subtitle{New Trends in Research}
 \author{Javier Ignacio Reyes Garcia \\
@@ -72,10 +74,17 @@
 
 \maketitle
 
-\begin{frame}
+\begin{frame}{Outline}
 	\setbeamertemplate{section in toc}[circle]
 	\setbeamertemplate{subsection in toc}[ball unnumbered]
-	\tableofcontents
+	\begin{columns}[t]
+		\begin{column}{.5\textwidth}
+				\tableofcontents[sections={1-2}]
+		\end{column}
+		\begin{column}{.5\textwidth}
+				\tableofcontents[sections={3-4}]
+		\end{column}
+	\end{columns}
 \end{frame}
 
 \setbeamertemplate{frame footer}{\tiny{New Trends in Research} \hspace{2cm} \tiny{Dortmund University of Applied Sciences and Arts}}
