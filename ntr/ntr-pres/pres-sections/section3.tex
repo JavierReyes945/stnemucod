@@ -112,6 +112,24 @@ vivado &
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
+				\includegraphics[width=\textwidth]{can-emio.png}
+				\caption{Vivado project - Signals routing.}\label{fig:can-emio}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{can-clock.png}
+				\caption{Vivado project - Clock configuration.}\label{fig:can-clock}
+			\end{figure}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hardware Project}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
 				\includegraphics[width=\textwidth]{ip-core.png}
 				\caption{Vivado project - Block Design.}\label{fig:ip-core}
 			\end{figure}
@@ -123,6 +141,45 @@ vivado &
 				\item Set all signals that will be routed to a physical pin external (Make external).
 				\item Generate an HDL wrapper for the Block Design.
 			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hardware Project}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{set-constraints.png}
+				\caption{Vivado project - External pins mapping.}\label{fig:set-constraints}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
+				\item Config the IO standard (LVCMOS33 for the Zynqberry board) and package pin for the signals made external (see Trenz TRM \cite{zynq-trm}).
+				\item Run Synthesis, Implementation and Generate Bitstream.
+				\item Export hardware, including bitstream file.
+				\item Launch SDK, selecting the local project environment.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hardware Project}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{zynq-pins.png}
+				\caption{Vivado project - Mapped pins location.}\label{fig:zynq-pins}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{header-pins.png}
+				\caption{Vivado project - Header pins identification.}\label{fig:header-pins}
+			\end{figure}
 		\end{column}
 	\end{columns}
 \end{frame}

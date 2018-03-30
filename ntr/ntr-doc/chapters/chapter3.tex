@@ -89,7 +89,19 @@ The procedure for the hardware definition can vary depending on the specific har
 	\end{figure}
 	\item Generate an HDL wrapper for the Block Design.
 	\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\textwidth]{set-constraints.png}
+		\caption{Hardware design constraints - External pins.}
+		\label{fig:set-constraints}
+	\end{figure}
 	\item Config the IO standard (LVCMOS33 for the Zynqberry board) and package pin for the signals made external (see Trenz TRM \cite{zynq-trm}).
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[width=0.7\textwidth]{zynq-pins.png}
+		\caption{Location of the mapped pins to board header.}
+		\label{fig:zynq-pins}
+	\end{figure}
 	\item Run Synthesis, Implementation and Generate Bitstream.
 	\item Export hardware, including bitstream file.
 	\item Launch SDK, selecting the local project environment.
