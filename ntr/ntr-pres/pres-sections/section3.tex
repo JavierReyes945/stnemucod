@@ -140,6 +140,7 @@ vivado &
 				\item Run the Connection Automation wizard.
 				\item Set all signals that will be routed to a physical pin external (Make external).
 				\item Generate an HDL wrapper for the Block Design.
+				\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -156,8 +157,7 @@ vivado &
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
-				\item Config the IO standard (LVCMOS33 for the Zynqberry board) and package pin for the signals made external (see Trenz TRM \cite{zynq-trm}).
+				\item Config the IO standard and package pin for the external signals (see Trenz TRM \cite{zynq-trm}).
 				\item Run Synthesis, Implementation and Generate Bitstream.
 				\item Export hardware, including bitstream file.
 				\item Launch SDK, selecting the local project environment.
@@ -184,6 +184,77 @@ vivado &
 	\end{columns}
 \end{frame}
 
-% \lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
+\begin{frame}[fragile]
+	\frametitle{GUI Vs. TCL Console}
+	Vivado includes a TCL scripting language integrated, for more complex designs. The entire GUI interaction can be translated into TCL command.
+	\lstinputlisting[language=tcl, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
+\end{frame}
 
 \subsection{Xilinx SDK}
+
+\begin{frame}
+	\frametitle{Software Project}
+	Based on the Eclipse SDK, for application development on Zynq Ultrascale+ MPSoC and Zynq-7000 All Programmable families.
+	\vfill
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Editor
+				\item Compilers
+				\item Build tools
+				\item Flash memory Management
+				\item JTAG debug integration
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Hierarchical Profiling
+				\item Bare-Metal and Linux development
+				\item Homogeneous and heterogeneous multi-processor support
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Software Project structure}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.8\textwidth]{xilinx-project-structure.png}
+				\caption{Xilinx SDK project structure.}\label{fig:xilinx-project-structure}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{block}{Design aware}
+				The software project is handled inside the Vivado project environment, and asimilates the Hardware design to configure Software parameters.
+			\end{block}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Software Project structure}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=0.8\textwidth]{xilinx-project-structure.png}
+				\caption{Xilinx SDK project structure.}\label{fig:xilinx-project-structure}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{block}{Design aware}
+				The software project is handled inside the Vivado project environment, and asimilates the Hardware design to configure Software parameters.
+			\end{block}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Integration issue}
+	When the hardware project is exported and SDK is launched with the workspace local to the hardware project, The SDK folder gets linked to the hardware platform designed.
+	\vfill
+	\begin{alertblock}{Duplicate files/folers alert}
+		If a change is made in the hardware project \textbf{after} the SDK project is created, Vivado will create a second hardware platform into SDK. Care need to be taken regardless hardware version, and duplicate files.
+	\end{alertblock}
+\end{frame}

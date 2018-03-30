@@ -111,7 +111,7 @@ At this point, the SDK will be started and automatically imported the hardware d
 
 The Vivado tool is also capable of command line scripts in TCL scripting language. This method can be a quite more complex to follow than the GUI, but it also increases the certainty in the procedure, as well as the ease of share, debug or collaborate (as a text file, can be easily pushed into a Source Control repository). The repository contains a file \texttt{create\_project.tcl} (snippet shown partially), that can recreate the workflow above defined if run from the Xilinx Vivado TCL console \cite{UG835}.
 
-\lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
+\lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
 
 \section{IDiAL Server}
 
@@ -125,4 +125,4 @@ In order to keep the environment available for further development, a Virtual Ma
 	\item IP-Address: 172.22.167.120
 \end{itemize}
 
-On this machine, the Vivado Design Suite was installed, as well as the Petalinux tool, in order fully handle the Zynqberry device. In order to access it, the VMware client can be used in Windows, or using the \texttt{vpnc} package in Linux. It can only be accessed from the FB4 network directly, or via the FB4 VPN\footnote{Connection details under \underline{https://www.fh-dortmund.de/de/fb/4/103020100000253634.php}}
+On this machine, the Vivado Design Suite was installed, as well as the Petalinux tool, in order fully handle the Zynqberry device. For accessing the VM, the VMware client can be used in Windows, or using the \texttt{vpnc} package in Linux. It can only be accessed from the FB4 network directly, or via the FB4 VPN\footnote{Connection details under \underline{https://www.fh-dortmund.de/de/fb/4/103020100000253634.php}}
