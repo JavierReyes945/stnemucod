@@ -222,24 +222,7 @@ vivado &
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\includegraphics[width=0.8\textwidth]{xilinx-project-structure.png}
-				\caption{Xilinx SDK project structure.}\label{fig:xilinx-project-structure}
-			\end{figure}
-		\end{column}
-		\begin{column}{0.5\textwidth}
-			\begin{block}{Design aware}
-				The software project is handled inside the Vivado project environment, and asimilates the Hardware design to configure Software parameters.
-			\end{block}
-		\end{column}
-	\end{columns}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Software Project structure}
-	\begin{columns}
-		\begin{column}{0.5\textwidth}
-			\begin{figure}
-				\includegraphics[width=0.8\textwidth]{xilinx-project-structure.png}
-				\caption{Xilinx SDK project structure.}\label{fig:xilinx-project-structure}
+				\caption{Xilinx project structure.}\label{fig:xilinx-project-structure}
 			\end{figure}
 		\end{column}
 		\begin{column}{0.5\textwidth}
@@ -257,4 +240,71 @@ vivado &
 	\begin{alertblock}{Duplicate files/folers alert}
 		If a change is made in the hardware project \textbf{after} the SDK project is created, Vivado will create a second hardware platform into SDK. Care need to be taken regardless hardware version, and duplicate files.
 	\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Board Support Package}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			Once the Hardware Platform is imported into SDK, a \textbf{Board Support Package} (BSP) needs to be created. \\
+			\vspace{1em}
+			It can be created either independent, or as part of a Software Application Project.
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			SDK includes the following BSP:
+			\begin{itemize}
+				\item Standalone - single-threaded environment, basic features (std IO, hardware access).
+				\item Xilkernel - lightweight kernel with POSIX style services (scheduling, threads, synchronization, etc.).
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Board Support Package}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			The BSP provides drivers and libraries (lower layer software stack) for the specific hardware designed.
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			When built, BSP include automatically:
+			\begin{itemize}
+				\item Standard C libraries
+				\item Device Drivers for all peripherals
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{BSP Reconfiguration}
+	The BSP can be configured and recompiled, to include additional libraries, or setup the parameters for the available drivers.
+	\vfill
+	\begin{alertblock}{Update needed}
+		As the standalone applications may need a console to interact with, the STDIN and STDOUT are linked by default to UART0. In the Zynberry 726, the USB-serial converter is connected to the UART1. In order to use a console terminal, this needs to be changed.
+	\end{alertblock}
+\end{frame}
+
+\begin{frame}
+	\frametitle{SDK Project structure}
+	\begin{columns}
+		\begin{column}{0.25\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{sdk-projects.png}
+				\caption{SDK project structure.}\label{fig:sdk-projects}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.6\textwidth}
+			\begin{alertblock}{Files duplication}
+				The file linking/management in Xilinx and SDK tools uses copy commands for file management. It can lead to duplicated files. Relevant if the file is modified post-creation.
+			\end{alertblock}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{CAN module driver - BSP}
+	The BSP provides the driver module for CAN. An example snippet:
+	\vfill
+	\lstinputlisting[language=C, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={s32, u8, u32, XCanPs, NULL}, firstline=908, lastline=924, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
 \end{frame}
