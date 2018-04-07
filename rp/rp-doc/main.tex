@@ -13,7 +13,7 @@
 						bindingoffset=6mm]{geometry}
 
 % Adjust space between paragraphs
-\setlength{\parskip}{1.5em}
+\setlength{\parskip}{1em}
 % Adjust paragraph indentation
 \setlength{\parindent}{0em}
 
@@ -26,12 +26,11 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[RE]{New trends in research}
-\fancyhead[LO]{Javier Reyes}
+\fancyhead[RE, LO]{\textit{Research Project}}
 \fancyfoot{}
 \fancyfoot[LO, RE]{\thepage}
-\fancyfoot[RO]{\footnotesize{\rightmark}}
-\fancyfoot[LE]{\footnotesize{\leftmark}}
+\fancyfoot[RO]{\footnotesize{\textit{\nouppercase{\rightmark}}}}
+\fancyfoot[LE]{\footnotesize{\textit{\nouppercase{\leftmark}}}}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{1pt}
 
@@ -86,7 +85,14 @@
 
 % For equations
 \usepackage{amsmath}
-	
+
+% For simple quotations
+\usepackage{dirtytalk}
+
+% For lists spacing configuration
+\usepackage{enumitem}
+\setlist[itemize]{nosep}
+
 % Start of the document
 \begin{document}
 
