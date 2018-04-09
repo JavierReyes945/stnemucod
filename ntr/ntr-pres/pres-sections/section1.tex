@@ -15,8 +15,7 @@
 				\textbf{E}valuation \\
 				ro\textbf{BOT}
 			\end{flushleft}
-		\end{column}
-		\pause
+		\end{column} \pause
 		\begin{column}{0.6\textwidth}
 			\begin{figure}
 				\includegraphics[width=\textwidth]{daebot-pic.png}
@@ -28,13 +27,10 @@
 
 \begin{frame}
 	\frametitle{DAEbot Project}
-	Characteristics\footnote[frame]{See oficial Wiki \cite{Wiki}}:
+	Characteristics\footnote[frame]{See oficial Wiki \cite{Wiki}}: \pause
 	\begin{itemize}
-		\pause
 		\item Designed to be modular.
-		\pause
-		\item Allows different approaches for distributed HW and SW architectures.
-		\pause
+		\item Allows different approaches for distributed HW and SW architectures. \pause
 		\item Robust and big enough to carry several sensors and actuators.
 	\end{itemize}
 \end{frame}
@@ -57,28 +53,14 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}
-	\frametitle{DAEbot Structure}
-	\textbf{\LARGE{Operator+ Goal:}} \\
-	\large{Provide additional resources for the main Reflective Operator, thanks to its advantages in speed for parallel tasks in FPGA hardware.}
-	\pause
-	\vfill
-	\begin{exampleblock}{Condition}
-		The main Reflective Operator activates (via relay) the Operator+ when it is needed.
-	\end{exampleblock}
-\end{frame}
-
 \subsection{OCM Structure}
 
 \begin{frame}
 	\frametitle{OCM Structure}
-	{\Large Layers\footnote[frame]{See \cite{Lueckel2001}}:}
+	Layers\footnote[frame]{See \cite{Lueckel2001}}: \pause
 	\begin{itemize}
-		\pause
-		\item Controller: Lowest level layer, traditional controller as a \underline{control loop}, usually based on mathematical model.
-		\pause
-		\item Reflective Operator: Monitoring and control, allows communication with other systems in a network.
-		\pause
+		\item Controller: Lowest level layer, traditional controller as a \underline{control loop}, usually based on mathematical model. \pause
+		\item Reflective Operator: Monitoring and control, allows communication with other systems in a network. \pause
 		\item Cognitive Operator: Coordination/communication interactions or learning algorithms, expanded functionality.
 	\end{itemize}
 \end{frame}
@@ -89,4 +71,14 @@
 		\includegraphics[width=0.5\textwidth, center]{ocm-architecture.png}
 		\caption{OCM general structure diagram.}\label{fig:ocm-architecture}
 	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{DAEbot need}
+	\textbf{\LARGE{Operator+ Goal:}} \\
+	\large{Provide additional resources for the main Reflective Operator, thanks to its advantages in speed for parallel tasks in FPGA hardware.}
+	\vfill \pause
+	\begin{exampleblock}{Condition}
+		The main Reflective Operator activates (via relay) the Operator+ when it is needed.
+	\end{exampleblock}
 \end{frame}

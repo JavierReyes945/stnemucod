@@ -7,12 +7,12 @@
 \begin{frame}
 	\frametitle{Vivado HLx}
 	Replacing ISE tools, the tool suite allows design, integration and implementation of systems for the Xilinx technologies.
-	\vfill
+	\vfill \pause
 	Included programs:
 	\begin{itemize}
-		\item Vivado HLx - High Level design
-		\item Xilinx SDK - Software development 
-		\item Vivado HLS - High Level Synthesis
+		\item Vivado HLx - Hardware description \pause
+		\item Xilinx SDK - Software development \pause
+		\item Vivado HLS - High Level Synthesis \pause
 		\item (Optional, external) Petalinux - Embedded Linux image building
 	\end{itemize}
 \end{frame}
@@ -20,7 +20,8 @@
 \begin{frame}
 	\frametitle{Vivado HLx}
 	\begin{itemize}
-		\item Interaction through GUI or native embedded TCL scripting language (commands either through the IDE console, or as file scripts). 
+		\item Interaction through GUI or native embedded TCL scripting language (commands either through the IDE console, or as file scripts).
+		\vspace{2 em} \pause
 		\item Runs under Windows and Linux\footnote[frame]{Distro dependant, see \cite{UG973}} OS.
 	\end{itemize}
 \end{frame}
@@ -58,7 +59,7 @@ sudo ./install_drivers
 source _vivado_installed_folder_/settings64.sh
 # Launch the Vivado GUI, blocks the terminal when launched
 vivado &
-	\end{lstlisting}
+	\end{lstlisting} \pause
 	\begin{alertblock}{Constraint}
 		{\small The Windows installer runs automatically the USB drivers, while in Linux it needs to be run after the Installation.}
 	\end{alertblock}
@@ -78,13 +79,36 @@ vivado &
 				\item Create a new project.
 				\item Select RTL project type.
 				\item Select the correspondent device.
-				\item Create a new Block Design.
-				\item Add the Zynq7 IP Core.
-				\item Add/create any other necesary IP Core.
-				\item Configure the IP Core.
 			\end{itemize}
 		\end{column}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hardware Project}
+	\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{figure}
+				\includegraphics[width=\textwidth]{vivado-createbd.png}
+				\caption{Vivado project - Create Block Design.}\label{fig:vivado-createbd}
+			\end{figure}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item Create a new Block Design.
+				\item Add the Zynq7 IP Core.
+				\item Add/create any other necessary IP Cores.
+				\item Configure the IP Cores.
+			\end{itemize}
+		\end{column}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hardware Project}
+	Trenz Electronics provides\footnote[frame]{Not directly. Found in \cite{zynq-wiki}, claimed to be from manufacturer.} a TCL script with default configuration values for the Znyqberry 726, that facilitates the process.
+	\vfill
+	\lstinputlisting[language=tcl, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=8, lastline=16, firstnumber=8, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/ZynqBerryPSDefault.tcl}
 \end{frame}
 
 \begin{frame}
@@ -98,10 +122,9 @@ vivado &
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Apply the configuration in the TCL script, provided by the manufacturer.
 				\item Enable all the required peripherals (CAN, USB, etc).
 				\item Route all the enabled modules to an available MIO pin or via EMIO.
-				\item Configure the frequency for the CAN REF CLK signal (80 MHz).
+				\item Configure the frequency for the CAN REF CLK signal to 80 MHz.
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -115,7 +138,7 @@ vivado &
 				\includegraphics[width=\textwidth]{can-emio.png}
 				\caption{Vivado project - Signals routing.}\label{fig:can-emio}
 			\end{figure}
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\includegraphics[width=\textwidth]{can-clock.png}
@@ -136,11 +159,10 @@ vivado &
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Run the Block Automation wizard.
-				\item Run the Connection Automation wizard.
 				\item Set all signals that will be routed to a physical pin external (Make external).
+				\item Run the Block Automation and Connection Automation wizard.
 				\item Generate an HDL wrapper for the Block Design.
-				\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
+				\item Open Elaborated Design (RTL Analysis), and set the I/O planning layout.
 			\end{itemize}
 		\end{column}
 	\end{columns}
@@ -157,7 +179,7 @@ vivado &
 		\end{column}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
-				\item Config the IO standard and package pin for the external signals (see Trenz TRM \cite{zynq-trm}).
+				\item Config the IO standard and package pin for the external signals\footnote[frame]{see Trenz TRM \cite{zynq-trm}}.
 				\item Run Synthesis, Implementation and Generate Bitstream.
 				\item Export hardware, including bitstream file.
 				\item Launch SDK, selecting the local project environment.
@@ -174,7 +196,7 @@ vivado &
 				\includegraphics[width=\textwidth]{zynq-pins.png}
 				\caption{Vivado project - Mapped pins location.}\label{fig:zynq-pins}
 			\end{figure}
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.5\textwidth}
 			\begin{figure}
 				\includegraphics[width=\textwidth]{header-pins.png}
@@ -184,10 +206,18 @@ vivado &
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
 	\frametitle{GUI Vs. TCL Console}
-	Vivado includes a TCL scripting language integrated, for more complex designs. The entire GUI interaction can be translated into TCL command.
+	Vivado integrates TCL scripting language for more complex designs. Every action in GUI is printed as command in TCL console.
+	\vfill
 	\lstinputlisting[language=tcl, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
+\end{frame}
+
+\begin{frame}
+	\frametitle{GUI Vs. TCL Console}
+	Alternatively, Vivado can export a TCL script to recreate the current project (more complex syntax and comprehension).
+	\vfill
+	\lstinputlisting[language=tcl, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=645, lastline=655, firstnumber=645, breaklines=true, numbers=left]{../../../proj/sample_project/create_project.tcl}
 \end{frame}
 
 \subsection{Xilinx SDK}
@@ -195,7 +225,7 @@ vivado &
 \begin{frame}
 	\frametitle{Software Project}
 	Based on the Eclipse SDK, for application development on Zynq Ultrascale+ MPSoC and Zynq-7000 All Programmable families.
-	\vfill
+	\vfill \pause
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			\begin{itemize}
@@ -224,7 +254,7 @@ vivado &
 				\includegraphics[width=0.8\textwidth]{xilinx-project-structure.png}
 				\caption{Xilinx project structure.}\label{fig:xilinx-project-structure}
 			\end{figure}
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.5\textwidth}
 			\begin{block}{Design aware}
 				The software project is handled inside the Vivado project environment, and asimilates the Hardware design to configure Software parameters.
@@ -236,20 +266,20 @@ vivado &
 \begin{frame}
 	\frametitle{Integration issue}
 	When the hardware project is exported and SDK is launched with the workspace local to the hardware project, The SDK folder gets linked to the hardware platform designed.
-	\vfill
+	\vfill \pause
 	\begin{alertblock}{Duplicate files/folers alert}
 		If a change is made in the hardware project \textbf{after} the SDK project is created, Vivado will create a second hardware platform into SDK. Care need to be taken regardless hardware version, and duplicate files.
 	\end{alertblock}
 \end{frame}
 
-\begin{frame}[fragile]
+\begin{frame}
 	\frametitle{Board Support Package}
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			Once the Hardware Platform is imported into SDK, a \textbf{Board Support Package} (BSP) needs to be created. \\
-			\vspace{1em}
+			\vspace{1.5 em}
 			It can be created either independent, or as part of a Software Application Project.
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.5\textwidth}
 			SDK includes the following BSP:
 			\begin{itemize}
@@ -265,7 +295,7 @@ vivado &
 	\begin{columns}
 		\begin{column}{0.5\textwidth}
 			The BSP provides drivers and libraries (lower layer software stack) for the specific hardware designed.
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.5\textwidth}
 			When built, BSP include automatically:
 			\begin{itemize}
@@ -279,7 +309,7 @@ vivado &
 \begin{frame}
 	\frametitle{BSP Reconfiguration}
 	The BSP can be configured and recompiled, to include additional libraries, or setup the parameters for the available drivers.
-	\vfill
+	\vfill \pause
 	\begin{alertblock}{Update needed}
 		As the standalone applications may need a console to interact with, the STDIN and STDOUT are linked by default to UART0. In the Zynberry 726, the USB-serial converter is connected to the UART1. In order to use a console terminal, this needs to be changed.
 	\end{alertblock}
@@ -293,7 +323,7 @@ vivado &
 				\includegraphics[width=\textwidth]{sdk-projects.png}
 				\caption{SDK project structure.}\label{fig:sdk-projects}
 			\end{figure}
-		\end{column}
+		\end{column} \pause
 		\begin{column}{0.6\textwidth}
 			\begin{alertblock}{Files duplication}
 				The file linking/management in Xilinx and SDK tools uses copy commands for file management. It can lead to duplicated files. Relevant if the file is modified post-creation.
@@ -305,6 +335,5 @@ vivado &
 \begin{frame}
 	\frametitle{CAN module driver - BSP}
 	The BSP provides the driver module for CAN. An example snippet:
-	\vfill
-	\lstinputlisting[language=C, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={s32, u8, u32, XCanPs, NULL}, firstline=908, lastline=924, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN/src/main.c}
+	\lstinputlisting[language=C, basicstyle=\tiny\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={s32, u8, u32, XCanPs, NULL}, firstline=476, lastline=497, firstnumber=476, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/zynqberryHW_CAN.sdk/zynqberryCAN_bsp/ps7_cortexa9_0/libsrc/canps_v3_2/src/xcanps.c}
 \end{frame}
