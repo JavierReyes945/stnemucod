@@ -10,13 +10,20 @@ The robot is designed and built with common hardware (evaluation boards and popu
 
 \section{OCM architecture}
 
-Typical mechatronic systems complexity grows exponentialy with every new technological step, which requieres a careful process of defining the right architecture for mechatronic systems. On this base concept, the goal for the DAEbot architecture is graphically represented in the figure \ref{fig:ocm}.
+Typical mechatronic systems complexity grows exponentialy with every new technological step, which requieres a careful process of defining the right architecture for mechatronic systems. On this base concept, the goal for the DAEbot architecture is graphically represented in the figure \ref{fig:ocm-architecture}.
 
-\begin{figure}[h]
+\begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.6\textwidth]{ocm-architecture.png}
-	\caption{OCM software architecture model.} \label{fig:ocm}
-\end{figure}
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth, center]{ocm-architecture.png}
+		\caption{OCM model.} \label{fig:ocm-architecture}
+	\end{subfigure} \hfill
+	\begin{subfigure}{0.45\textwidth}
+		\includegraphics[width=\textwidth, center]{dae-architecture.png}
+		\caption{DAEbot model.} \label{fig:dae-architecture}
+	\end{subfigure}%
+	\caption{OCM software architectural model, from \cite{Wiki}.} \label{fig:ocm-dae}
+\end{figure}%
 
 The OCM structure is based on the work of the Mechatronics Laboratory Paderborn as a hierarchical structure for mechatronics systems \cite{Lueckel2001}. This structure defines three different layers that allows the clear seaparation of controllers, considering the real-time characteristics, and therefore allowing a more comprehensive development process.
 
@@ -26,13 +33,7 @@ The OCM structure is based on the work of the Mechatronics Laboratory Paderborn 
 	\item[Cognitive Operator] \hfill \\ For more complex systems, that need coordination/communication interactions or learning algorithms, the Cognitive layer expands the functionality.
 \end{description}
 
-The DAEbot defined structure related to the OCM architecture can be seen in figure \ref{fig:daebot}.
-
-\begin{figure}[ht]
-	\centering
-	\includegraphics[width=0.6\textwidth]{dae-architecture.png}
-	\caption{DAEbot architecture.} \label{fig:daebot}
-\end{figure}
+The DAEbot defined structure related to the OCM architecture can be seen in figure \ref{fig:dae-architecture}.
 
 Given the modular architecture, the design and develoment of each of the elements in the system can be modularized and worked independently, under the guidelines of the structure.
 

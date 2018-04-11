@@ -29,12 +29,12 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[RE]{New trends in research}
+\fancyhead[RE, LO]{Research Seminar}
 \fancyhead[LO]{Javier Reyes}
 \fancyfoot{}
 \fancyfoot[LO, RE]{\thepage}
-\fancyfoot[RO]{\footnotesize{\rightmark}}
-\fancyfoot[LE]{\footnotesize{\leftmark}}
+\fancyfoot[RO]{\footnotesize{\textit{\nouppercase{\rightmark}}}}
+\fancyfoot[LE]{\footnotesize{\textit{\nouppercase{\leftmark}}}}
 \renewcommand{\headrulewidth}{2pt}
 \renewcommand{\footrulewidth}{1pt}
 
@@ -74,6 +74,11 @@
 \graphicspath{{../img/}}
 % Required for the placement specifier
 \usepackage{float}
+\usepackage[section]{placeins}
+\usepackage[export]{adjustbox}
+% Required for double images
+\usepackage{caption}
+\usepackage{subcaption}
 
 % References management
 \usepackage[backend=biber,
@@ -90,6 +95,10 @@
 % For equations
 \usepackage{amsmath}
 
+% For lists spacing configuration
+\usepackage{enumitem}
+\setlist{itemsep=2 pt}
+
 % Start of the document
 \begin{document}
 
@@ -97,7 +106,9 @@
 \input{chapters/titlepage}
 
 % Insert table of contents
+\renewcommand{\baselinestretch}{0.75}\normalsize
 \tableofcontents
+\renewcommand{\baselinestretch}{1.0}\normalsize
 
 % Content chapters
 \input{chapters/chapter1}

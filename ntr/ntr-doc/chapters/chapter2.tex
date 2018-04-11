@@ -7,7 +7,7 @@
 \begin{figure}
 	\centering
 	\includegraphics[width=0.5\textwidth]{zynqberry-top.png}
-	\caption{Top view of the Znyqberry board.} \label{fig:znyqtop}
+	\caption{Top view of the Znyqberry board, from \cite{zynq-main}.} \label{fig:znyqtop}
 \end{figure}
 
 The Zynqberry board, developed by the company Trenz Electronic GmbH, is a SoM (System on Module) based on the Xilinx All Programmable Zynq-700 SoC (XC7Z010) along with standar peripherials in an industrial-grade Raspberry Pi form factor. Some of the most relevant features are listed below \cite{zynq-main}:
@@ -41,8 +41,7 @@ The Zynqberry board, developed by the company Trenz Electronic GmbH, is a SoM (S
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{zynq-block-diagram.png}
-	\caption{Block diagram of the Zynqberry 726.}
-	\label{fig:zynqblock}
+	\caption{Block diagram of the Zynqberry 726, from \cite{zynq-trm}.}	\label{fig:zynqblock}
 \end{figure}
 
 The physical device used in this project corresponds to the version 02 of the product, despite the fact that the manufacturer holds a newer 03 version. This needs to be considered during any reference consultation.
@@ -58,15 +57,17 @@ The Zynq-7000 SoC devices are part of the Xilinx All Programmable SoC architectu
 \begin{figure}
 	\centering
 	\includegraphics[width=0.7\textwidth]{zynq-arch-diag.png}
-	\caption{Architecture diagram of the Zynq-7000 device family.}\label{fig:zynq-arch-diag}
+	\caption[Block diagram of the Zynq-7000 device family, from Xilinx Products Webpage.]{Architecture diagram of the Zynq-7000 device family, from Xilinx Products Webpage.\protect\footnotemark} \label{fig:zynq-arch-diag}
 \end{figure}
+
+\footnotetext{See \underline{https://www.xilinx.com/products/silicon-devices/soc/zynq-7000.html\#productAdvantages}}
 
 \subsubsection{Processing System PS}
 
 The Processing System (PS) is embedded into the FPGA device, providing and environment around it that makes possible more complex system configurations. The PS also includes on-chip memory and external memory interfaces. A more detailed characteristics description is available on \cite{DS190} and \cite{UG585}.
 
-\begin{description}
-	\item[ARM Cortex-A9 Application Processor Unit] \hfill \\
+\begin{itemize}
+	\item ARM Cortex-A9 Application Processor Unit
 	\begin{itemize}
 		\item 2.5 DMIPS/MHz per CPU
 		\item CPU frequency up to 1GHz
@@ -78,22 +79,19 @@ The Processing System (PS) is embedded into the FPGA device, providing and envir
 			\item Two triple-timer counters
 		\end{itemize}
 	\end{itemize}
-
-	\item[Cache] \hfill \\
+	\item Cache
 	\begin{itemize}
 		\item 32kB Level 1 4-way set-associative instruction and data caches (cpu independent)
 		\item 512 kB 8-way set associative Level 2 cache (CPU shared)
 		\item Byte-parity support
 	\end{itemize}
-
-	\item[On-chip memory] \hfill \\
+	\item On-chip memory
 	\begin{itemize}
 		\item On-chip boot ROM
 		\item 256 kB on-chip RAM (OCM)
 		\item Byte-parity support
 	\end{itemize}
-
-	\item[External Memory Interfaces] \hfill \\
+	\item External Memory Interfaces
 	\begin{itemize}
 		\item Multiprotocol dynamic memory controller
 		\item 16-bit or 32-bit interfaces to DDR3, DDR3L, DDR2 or LPDDR2 memories
@@ -106,13 +104,11 @@ The Processing System (PS) is embedded into the FPGA device, providing and envir
 			\item 1-bit SPI, 2-bit SPI, 4-bit SPI, or two quad-SPI (8-bit) serial NOR flash
 		\end{itemize}
 	\end{itemize}
-
-	\item[8-Channel DMA controller] \hfill \\
+	\item 8-Channel DMA controller
 	\begin{itemize}
 		\item Memory-to-memory, memory-to-peripherial, peripherial-to-memory and scatter-gather transaction support
 	\end{itemize}
-
-	\item[I/O Peripherials and Interfaces] \hfill \\
+	\item I/O Peripherials and Interfaces
 	\begin{itemize}
 		\item Two 10/100/1000 tri-speed Ethernet MAC peripherials with IEEE Std 802.3 and IEEE Std 1588 revision 2.0 support
 		\item Two USB 2.0 OTG peripherials, each supporting up to 12 Endpoints
@@ -134,34 +130,30 @@ The Processing System (PS) is embedded into the FPGA device, providing and envir
 		\item GPIO with four 32-bit banks, of which up to 54 bits can be used with the PS I/O (one bank of 32b and one bank of 22b) and up to 64 bits (up to two banks of 32b) connected to the Programmable Logic
 		\item Up to 54 flexible multiplexed I/O (MIO) for peripherial pin assignments
 	\end{itemize}
-
-	\item[Interconnect] \hfill \\
+	\item Interconnect
 	\begin{itemize}
 		\item High-bandwidth connectivity within PS and PL
 		\item ARM AMBA AXI based
 		\item QoS support on critical masters for latency and bandwidth control
 	\end{itemize}
-\end{description}
+\end{itemize}
 
 \subsubsection{Programmable Logic PL}
 
-\begin{description}
-	\item[Configurable Logic Blocks (CLB)] \hfill \\
+\begin{itemize}
+	\item Configurable Logic Blocks (CLB)
 	\begin{itemize}
 		\item Look-up tables (LUT)
 		\item Flip-flops
 		\item Cascadeable adders
 	\end{itemize}
-
-	\item[36 kb Block RAM] \hfill \\
+	\item 36 kb Block RAM
 	\begin{itemize}
 		\item True Dual-Port
 		\item Up to 72 bits wide
 		\item Configurable as dual 18 kb block RAM
 	\end{itemize}
-
-\end{description}
-
+\end{itemize}
 
 \section{Board Peripherials}
 

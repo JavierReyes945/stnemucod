@@ -14,7 +14,7 @@ The Vivado installer can be downloaded directly from the Xilinx downloads page. 
 
 In order to install the Vivado Suite on a secure location (under linux file systems the folder \texttt{/opt} is recommended), the installer should be executed with root privileges, despite the fact that the official documentation claims that it can be run without them. The linux installer also requires that the USB cable drivers are installed after the Suite installation (not necessary in Wondows, as this installer is executed automatically). The following script can be used as a guide for the installation:
 
-\begin{lstlisting}[language=bash, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={chmod, sudo}, numbers=left, breaklines=true]
+\begin{lstlisting}[language=bash, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={chmod, sudo}, breaklines=true]
 	# Give executable permission to the installer file
 	chmod +x <installer_filename>.bin
 	# Executes the installer with root privileges
@@ -40,9 +40,8 @@ Once the Vivado Design Suite is installed and running, the hardware project can 
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{project-device.png}
-	\caption{Device selection - Xilinx Hardware Project.}
-	\label{fig:device-vivado}
+	\includegraphics[width=0.5\textwidth]{project-device.png}
+	\caption{Device selection - Xilinx Hardware Project.} \label{fig:device-vivado}
 \end{figure}
 
 The hardware definition for the Zynq-7000 family implies the use of an IP Core design provided by Xilinx, in order to use the embedded ARM Cortex processor. Additional IP Cores can be added to the design in the Programmable Logic section, or user-defined hardware definition modules can be included.
@@ -51,56 +50,61 @@ The procedure for the hardware definition can vary depending on the specific har
 
 \begin{enumerate}
 	\item Create a new Block Design.
+	\begin{figure}[htp]
+		\centering
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth, center]{vivado-createbd.png}
+			\caption{Block Design source.} \label{fig:vivado-createbd}
+		\end{subfigure} \hfill
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth, center]{can-enable.png}
+			\caption{CAN peripheral enable.} \label{fig:can-enable}
+		\end{subfigure}%
+		\caption{Vivado hardware project creation.}
+	\end{figure}%
 	\item Add the Zynq7 Processing System IP Core to the Block Design.
 	\item Add/create all the necessary HDL modules or IP Cores [Optional].
 	\item Configure the Zynq7 PS Core:
 	\begin{enumerate}
 		\item Apply the configuration in a TCL script file (provided by the manufacturer), or manually configure the Core in the GUI.
 		\item Ensure that the necessary peripherals are enabled (CAN, USB).
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\textwidth]{can-enable.png}
-			\caption{CAN peripheral enable.}
-			\label{fig:can-enable}
-		\end{figure}
 		\item Ensure that the modules that are enabled (not by default) are routed to an available MIO pin (see Trenz TRM \cite{zynq-trm}), or via EMIO.
-		\begin{figure}[h!]
+		\begin{figure}[htp]
 			\centering
-			\includegraphics[width=0.7\textwidth]{can-emio.png}
-			\caption{CAN signals routing through EMIO.}
-			\label{fig:can-emio}
-		\end{figure}
+			\begin{subfigure}{0.45\textwidth}
+				\includegraphics[width=\textwidth, center]{can-emio.png}
+				\caption{CAN signals routing through EMIO.} \label{fig:can-emio}
+			\end{subfigure} \hfill
+			\begin{subfigure}{0.45\textwidth}
+				\includegraphics[width=\textwidth, center]{can-clock.png}
+				\caption{CAN module reference clock configuration.} \label{fig:can-clock}
+			\end{subfigure}%
+			\caption{Vivado hardware project creation.}
+		\end{figure}%
 		\item Configure the frequency for the CAN REF CLK signal (80MHz)\footnote{The default value is 100Mhz, but in lab tests the CAN timing was imperfect with this setting, while 80Mhz produce an exact time quanta for the 500 kbps CAN network.}.
-		\begin{figure}[h!]
-			\centering
-			\includegraphics[width=0.7\textwidth]{can-clock.png}
-			\caption{CAN module reference clock configuration.}
-			\label{fig:can-clock}
-		\end{figure}
 	\end{enumerate}
 	\item Run the Block Automation wizard.
 	\item Run the Connection Automation wizard.
 	\item Config all the signals that will be routed to a physical pin external (Make external).
-	\begin{figure}[h!]
+	\begin{figure}[htp]
 		\centering
-		\includegraphics[width=0.7\textwidth]{ip-core.png}
-		\caption{IP Core design block ready to sinthetize.}
-		\label{fig:ip-core}
-	\end{figure}
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth, center]{ip-core.png}
+			\caption{IP Core design block ready to sinthetize.} \label{fig:ip-core}
+		\end{subfigure} \hfill
+		\begin{subfigure}{0.45\textwidth}
+			\includegraphics[width=\textwidth, center]{set-constraints.png}
+			\caption{Hardware design constraints - External pins.} \label{fig:set-constraints}
+		\end{subfigure}%
+		\caption{Vivado hardware project creation.}
+	\end{figure}%
 	\item Generate an HDL wrapper for the Block Design.
 	\item Open the Elaborated Design (RTL Analysis), and set the I/O planning layout.
-	\begin{figure}[h!]
-		\centering
-		\includegraphics[width=0.7\textwidth]{set-constraints.png}
-		\caption{Hardware design constraints - External pins.}
-		\label{fig:set-constraints}
-	\end{figure}
 	\item Config the IO standard (LVCMOS33 for the Zynqberry board) and package pin for the signals made external (see Trenz TRM \cite{zynq-trm}).
-	\begin{figure}[h!]
+	\begin{figure}[htb]
 		\centering
-		\includegraphics[width=0.7\textwidth]{zynq-pins.png}
-		\caption{Location of the mapped pins to board header.}
-		\label{fig:zynq-pins}
+		\includegraphics[width=0.5\textwidth]{zynq-pins.png}
+		\caption{Location of the mapped pins to board header.} \label{fig:zynq-pins}
 	\end{figure}
 	\item Run Synthesis, Implementation and Generate Bitstream.
 	\item Export hardware, including bitstream file.
@@ -111,7 +115,7 @@ At this point, the SDK will be started and automatically imported the hardware d
 
 The Vivado tool is also capable of command line scripts in TCL scripting language. This method can be a quite more complex to follow than the GUI, but it also increases the certainty in the procedure, as well as the ease of share, debug or collaborate (as a text file, can be easily pushed into a Source Control repository). The repository contains a file \texttt{create\_project.tcl} (snippet shown partially), that can recreate the workflow above defined if run from the Xilinx Vivado TCL console \cite{UG835}.
 
-\lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=1, lastline=10, breaklines=true, numbers=left]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
+\lstinputlisting[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, create_bd_design, update_compile_order, create_bd_cell, apply_bd_automation}, firstline=1, lastline=10, breaklines=true, numbers=left, float=htb]{../../../git/DAEbot/Devices/Zynqberry_OperatorPlus/zynqberryHW_CAN/create_project.tcl}
 
 \section{IDiAL Server}
 
