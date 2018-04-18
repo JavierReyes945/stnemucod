@@ -8,8 +8,8 @@
 % Page sizes, margins, adjust for binding
 \usepackage[a4paper,
 						width=150mm,
-						top=30mm,
-						bottom=30mm,
+						top=25mm,
+						bottom=25mm,
 						bindingoffset=6mm]{geometry}
 
 % Adjust space between paragraphs
@@ -31,8 +31,8 @@
 \fancyfoot[LO, RE]{\thepage}
 \fancyfoot[RO]{\footnotesize{\textit{\nouppercase{\rightmark}}}}
 \fancyfoot[LE]{\footnotesize{\textit{\nouppercase{\leftmark}}}}
-\renewcommand{\headrulewidth}{2pt}
-\renewcommand{\footrulewidth}{1pt}
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{0.5pt}
 
 % Chapters and sections adjustment
 \usepackage{titlesec}
@@ -78,8 +78,9 @@
 \usepackage[backend=biber,
 						bibstyle=ieee,
 						autocite=footnote,
+						sorting=none,
 						citestyle=numeric]{biblatex}
-\bibliography{../references.bib}
+\addbibresource{../rp-ref.bib}
 
 % Required to use color
 \usepackage{xcolor}
@@ -116,8 +117,9 @@
 \input{chapters/chapter5}
 
 % Insert the referenced bibliography
-\printbibliography
+\printbibliography[title=References]
 \nocite{*}
+\addcontentsline{toc}{chapter}{References}
 
 \appendix
 \input{chapters/appendix1}
