@@ -40,7 +40,7 @@
 {\chapter} % command
 [display] % shape
 {\bfseries\Huge} % format
-{\chaptertitlename \thechapter} % label
+{\chaptertitlename~\thechapter} % label
 {-1ex} % sep
 {
 \rule{\textwidth}{1pt}
@@ -96,6 +96,9 @@
 \usepackage{enumitem}
 \setlist[itemize]{nosep}
 
+% Add hyperlinks support
+\usepackage[hidelinks]{hyperref}
+
 % Start of the document
 \begin{document}
 
@@ -110,9 +113,13 @@
 \input{chapters/chapter2}
 \input{chapters/chapter3}
 \input{chapters/chapter4}
+\input{chapters/chapter5}
 
 % Insert the referenced bibliography
 \printbibliography
 \nocite{*}
+
+\appendix
+\input{chapters/appendix1}
 
 \end{document}
