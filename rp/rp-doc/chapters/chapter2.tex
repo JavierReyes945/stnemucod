@@ -2,8 +2,6 @@
 % Research Project
 % Author: Javier Reyes
 
-% TODO: Complete first chapter content
-
 \chapter{DAEbot Environment}
 
 The DAEbot project stands for Distributed Architectures Evaluation robot, a modular system that allows different approaches for distributed hardware and software architectures to be tested \cite{Wiki}.
@@ -33,15 +31,15 @@ The OCM structure is based on the work of the Mechatronics Laboratory Paderborn 
 
 Given the modular architecture, the design and develoment of each of the elements in the system can be modularized and worked independently, under the guidelines of the structure.
 
-\subsection{Controller Layer}
+\subsection*{Controller Layer}
 
 This is the lowest level layer, where the traditional controller is defined as a traditional control loop, usually based on a mathematical model. This way the controller gains flexibility in terms of the configuration parameters, and can be individually simulated and tested (XiL), allowing different operation modes which will be \textit{operated} from the next layer.
 
-\subsection{Reflective Operator Layer}
+\subsection*{Reflective Operator Layer}
 
 On this layer, the monitoring and control is implemented, and even allow communication with other systems in a network.
 
-\subsection{Cognitive Operator}
+\subsection*{Cognitive Operator}
 
 For more complex systems, that need coordination/communication interactions or learning algorithms, the Cognitive layer expands the functionality.
 
