@@ -6,8 +6,22 @@
 
 \chapter{Guide - Linux in the Zynqberry} \label{appen1}
 
-The following procedure shows the oficial (recommended) procedure to build and boot a Linux OS in the Zynqberry 726 board, based on the different material available from the manufacturer of the board and the Zynq device.
+The following procedure shows the actual steps followed to build and boot an embedded Linux image in the Zynqberry 726 board, based on the different material available from the manufacturer of the board and the Zynq device.
 
-Every board provided by Trenz Electronics can have different procedures, due to technical characteristics or limitations. This document will be only valid for the model TE0727-02M on which the work was tested. The tools and software for the hardware design (Xilinx Vivado), software development (Xilinx SDK) and OS image building (Xilinx Petalinux) are valid only for the version 2017.4. It has been observed that every new release of this tools imply a quite substancial change in the commands, or the workflow. There is no guaranteed backwards compatibility.
+Every board provided by Trenz Electronics can have different procedures, due to technical characteristics or limitations. This document will be only valid for the model TE0727-02R on which the work was tested. The tools and software for the hardware design (Xilinx Vivado), software development (Xilinx SDK) and OS image building (Xilinx Petalinux) are valid only for the version 2017.4. It has been observed that every new release of this tools imply a quite substancial change in the commands, or the workflow. There is no guaranteed backwards or forward compatibility.
 
-The main flow can differ from the actual flow performed during this work, as it is proposed as a clean and automated, whereas the actual process followed for design, test and debug may require additional steps or other tools to actually achieve the goal.
+In order to define the environment, the following requisites are established:
+
+\begin{itemize}
+	\item The board TE 0726-02R from Trenz Electronics, together with a USB cable.
+	\item An SD card (appropiate for boot purposes, speed class 10).
+	\item A working station complying with the minimum installation requirements for the Vivado Design Suite 2017.4 (See \cite{UG973}).
+	\item A working station complying with the minimum installation requirements for the Petalinux SDK 2017.4 (See \cite{UG1144}).
+	\item Internet connectivity during the Linux image build process.
+\end{itemize}
+
+\section{Hardware Project}
+
+\section{Embedded Linux image build}
+
+\section{Boot up process}

@@ -24,7 +24,7 @@ Typical mechatronic systems complexity grows exponentialy with every new technol
 		\includegraphics[width=\textwidth]{dae-architecture.png}
 		\caption{DAEbot model.} \label{fig:dae-architecture}
 	\end{subfigure}%
-	\caption{OCM software architectural model} \label{fig:ocm-dae}
+	\caption{OCM software architectural model, from \cite{Wiki}.} \label{fig:ocm-dae}
 \end{figure}%
 
 The OCM structure is based on the work of the Mechatronics Laboratory Paderborn as a hierarchical structure for mechatronics systems \cite{Lueckel2001}. This structure defines three different layers that allows the clear seaparation of controllers, considering the real-time characteristics, and therefore allowing a more comprehensive development process. The DAEbot defined structure related to the OCM architecture can be seen in figure \ref{fig:dae-architecture}.
@@ -50,7 +50,7 @@ The zynqberry board, with its FPGA capababilities, is considered a second operat
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.5\textwidth]{zynqberry-top.png}
-	\caption{Top view of the Znyqberry board.} \label{fig:znyqtop}
+	\caption{Top view of the Znyqberry board, from \cite{zynq-main}.} \label{fig:znyqtop}
 \end{figure}
 
 \subsection{Board Peripherals}
@@ -86,7 +86,7 @@ The Zynqberry board, developed by the company Trenz Electronic GmbH, is a SoM (S
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.7\textwidth]{zynq-block-diagram.png}
-	\caption{Block diagram of the Zynqberry 726.}
+	\caption{Block diagram of the Zynqberry 726, from \cite{zynq-trm}.}
 	\label{fig:zynqblock}
 \end{figure}
 
@@ -99,7 +99,7 @@ The heart of the Zynqberry SBC is one of the Zynq-7000 All Programmable System-o
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.6\textwidth]{zynq-arch-diag.png}
-	\caption{Zynq XC7Z010 architectural diagram.} \label{fig:zynq-arch-diag}
+	\caption{Zynq XC7Z010 architectural diagram, from \cite{DS190}.} \label{fig:zynq-arch-diag}
 \end{figure}
 
 The Zynq architecture allows the interconnection between PS  and PL signals, offering higher levels of performance compared to two-chip solutions, thanks to the industry standard AXI interfaces \cite{Crokett2014}. The main system is considered to be the PS, as it is the first one to boot up, and has the responsability to configure the PL (either during boot, or at any future moment) via a bitstream.
@@ -143,7 +143,7 @@ Each core of the ARM PS provides a NEON Media Processing Engine (MPE) and a Floa
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.7\textwidth]{neon-structure.png}
-	\caption{Processing scheme for SIMD NEON engine.} \label{fig:neon-structure}
+	\caption{Processing scheme for SIMD NEON engine, from \cite{Crokett2014}.} \label{fig:neon-structure}
 \end{figure}
 
 \subsubsection{Peripherals}
@@ -220,7 +220,7 @@ The Programmable Logic PL section of the XC7Z010 device is mainly composed of FP
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.5\textwidth]{fpga-compose.png}
-	\caption{General purpose Logic Fabric composition.} \label{fig:fpga-compose}
+	\caption{General purpose Logic Fabric composition, from \cite{Crokett2014}.} \label{fig:fpga-compose}
 \end{figure}
 
 \subsubsection{Configurable Logic Blocks}
@@ -230,7 +230,7 @@ The elements where the combinational and sequential logic is implemented. Includ
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.5\textwidth]{fpga-clb.png}
-	\caption{General purpose Logic Fabric composition.} \label{fig:fpga-clb}
+	\caption{General purpose Logic Fabric composition, from \cite{Crokett2014}.} \label{fig:fpga-clb}
 \end{figure}
 
 \subsubsection{DSP Blocks}
@@ -240,7 +240,7 @@ Silicon resources available for arithmetic circuits (specially those with long w
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.5\textwidth]{fpga-dsp.png}
-	\caption{General purpose Logic Fabric composition.} \label{fig:fpga-dsp}
+	\caption{General purpose Logic Fabric composition, from \cite{Crokett2014}.} \label{fig:fpga-dsp}
 \end{figure}
 
 \subsubsection{RAM Blocks}
@@ -250,7 +250,7 @@ Implemented close to the DSP blocks as columns between the fabric logic, as it i
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=0.5\textwidth]{fpga-ram.png}
-	\caption{General purpose Logic Fabric composition.} \label{fig:fpga-ram}
+	\caption{General purpose Logic Fabric composition, from \cite{Crokett2014}.} \label{fig:fpga-ram}
 \end{figure}
 
 All of this resources are usually defined to be targeted by the tools (Synthesis and Implementation), it is always a good advice to be aware of the technological capabilities.
@@ -263,4 +263,40 @@ To obtain a more detailed description for development, the Technical Reference M
 
 \subsection{PS-PL Interfaces}
 
-% TODO: COmplete interface PS-PL topic
+\subsubsection*{AXI Interconnect}
+
+The main feature of the Zynq architecture is the ability to use both PS and PL in an integrated system. For this, the \textit{AXI Interconnect} is a key element, as it forms a bridge between the two units. This standard for \textbf{A}dvanced E\textbf{X}tensible \textbf{I}nterface (in its current version, AXI4) is part of ARM AMBA 3.0 open standard, described as \textit{"the de facto standard for for on-chip communication"} \cite{Crokett2014}.
+
+There are three different bur protocols for AXI, depending of the specific connection properties:
+
+\begin{itemize}
+	\item AXI4: For memory-mapped links, with highest performance. An address is suplied, and a burts of up to 256 data words can follow.
+	\item AXI4-Lite: Simplified link (an address and a single data word) for only one transfer per connection, also memory-mapped.
+	\item AXI4-Stream: For high-speed streaming data, supports burst transfers without size restriction. No address mechanism, best suited to direct data flow between source and destination, without memory-mapping.
+\end{itemize}
+
+Behind each AXI Intercconnect, there are several different interfaces possible in the Zynq architecture. In the figure \ref{fig:zynq-axi-structure} can be seen the typical structure of AXI Interconnects and Interfaces.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{zynq-axi-structure.png}
+	\caption{Structure of AXI Interconnects and interfaces between PS and PL, from \cite{Crokett2014}.} \label{fig:zynq-axi-structure}
+\end{figure}
+
+\begin{itemize}
+	\item General Purpose AXI: A 32-bt data bus, suitable for low and medium rate communitcations between PL and PS. The direction of the communication is dictated by the master and slave of it. Ps is master of two of them, and PL is master of other two.
+	\item Accelerator coherency Port: A single asynchronous connection between PL and the SCU within the APU with a bus width of 64 bits. Used to achieve coherency between APU caches and elements in PL, which is the master.
+	\item High Performance Port: Four HP interfaces that include FIFO buffers to handle data burst (read and write), and high rate communications between PL and memory elements in the PS. Data can be 32 or 64 bits, and the master is PL.
+\end{itemize}
+
+\subsubsection*{EMIO}
+
+As mentioned in \ref{zynq7-soc}, the Zynq architecture includes ports for signals in the PS, which are hard defined in the chip layout. When these connections are not enough, one can expand the ports through the PL to external interfaces, referred to as Extended MIO.
+
+It is important to remark that not all MIO signals can be routed through EMIO, and those who actually can will have reduced capability. The routed signals can be either connected to external pins of the PL (specified in an appropiate constraint file), or connect to peripherial blocks present in the PL.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{emio-interface.png}
+	\caption{EMIO interface usage, from \cite{Crokett2014}.} \label{fig:emio-interface}
+\end{figure}
