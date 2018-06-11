@@ -2,7 +2,7 @@
 % Research Project
 % Author: Javier Reyes
 
-\chapter{Embedded Linux}
+\chapter{Embedded Linux} \label{embedded-linux}
 
 In order to have a usable stack implementation of Ethernet communication, it is recommended to boot an OS in the device, considering time and complexity for a standalone driver implementation of an Ethernet stack driver for the specific hardware configuration present in the Zynqberry.
 
@@ -112,9 +112,9 @@ Once the hardware has been correctly defined and exported, the Linux image build
 	\item Power up of the board starts.
 	\item The BOOT.BIN binary is read from flash memory through QSPI and run.
 	\item From this binary, the First Stage Boot Loader is then loaded, which will configure the PS and PL, and then locate and load the u-boot into DDR memory.
-	\item U-boot will configure the hardware, and then unpack and load the linux kernel.
+	\item U-boot will initialize the hardware, and then unpack and load the linux kernel.
 	\item Once the kernel is loaded into the high memory, specific hardware setup is run.
 	\item When kernel is ready, the first user-space application (\textit{init}) can start.
 \end{enumerate}
 
-Once the image (and other relevant binary files) has been correctly build, special care needs to 
+The specific process for the Zynqbery 726 board used in the project needs special considerations that are hardware-related. In general, the workflow provided by Xilinx needs to be slighltly modified, and use the board manufacturer documentation and scipts. This is due to the fact that the board uses specific hardware, and the documentation provided does not match. Once the image (and other relevant binary files) have been correctly build, special care needs to be taken to generate the BOOT.BIN file for the stage-0 boot process. More detailed instructions are provided in Appendix \ref{appen1}.
