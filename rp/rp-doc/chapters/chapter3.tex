@@ -4,15 +4,23 @@
 
 \chapter{Embedded Linux} \label{embedded-linux}
 
-In order to have a usable stack implementation of Ethernet communication, it is recommended to boot an OS in the device, considering time and complexity for a standalone driver implementation of an Ethernet stack driver for the specific hardware configuration present in the Zynqberry.
+In order to have a usable stack implementation of Ethernet communication, it is recommended to boot
+an OS in the device, considering time and complexity for a standalone driver implementation of an
+Ethernet stack driver for the specific hardware configuration present in the Zynqberry.
 
-Xilinx provides a workflow to create an embedded Linux image fitted for the ARM architecture, by means of a provided tool (a collection of command-line programs) to configure and compile Linux-based images focused on Xilinx hardware, using Yocto Project.
+Xilinx provides a workflow to create an embedded Linux image fitted for the ARM architecture, by
+means of a provided tool (a collection of command-line programs) to configure and compile
+Linux-based images focused on Xilinx hardware, using Yocto Project.
 
 \section{Xilinx Petalinux}
 
-Xilinx Petalinux is an Embedded Linux System Development Kit for Xilinx FPGA-based System-on-Chip devices\cite{UG1144}. It is based on Yocto Project SDK's for the Xilinx hardware architectures (Zynq, Zynq UltraScale+, MicroBlaze full and lite).
+Xilinx Petalinux is an Embedded Linux System Development Kit for Xilinx FPGA-based System-on-Chip
+devices\cite{UG1144}. It is based on Yocto Project SDK's for the Xilinx hardware architectures
+(Zynq, Zynq UltraScale+, MicroBlaze full and lite).
 
-The specific workflow for the tool can be different depending on the hardware platform and the desired application(s). As a reference, an overview flow is shown in the table \ref{table:design-flow-overview}.
+The specific workflow for the tool can be different depending on the hardware platform and the
+desired application(s). As a reference, an overview flow is shown in the table
+\ref{table:design-flow-overview}.
 
 \begin{table}[ht]
 	\centering
@@ -46,11 +54,17 @@ The specific workflow for the tool can be different depending on the hardware pl
 	\caption{Design Flow Overview, from \cite{UG1156}}\label{table:design-flow-overview}.
 \end{table}
 
-The Zynqberry board has a specific hasrdware configuration that requires a unique flow for building an embedded Linux image. Therefore, most of the standard flow cannot be applied directly. The followed procedure for this project is detailed in the Appendix \ref{appen1}.
+The Zynqberry board has a specific hasrdware configuration that requires a unique flow for building
+an embedded Linux image. Therefore, most of the standard flow cannot be applied directly. The
+followed procedure for this project is detailed in the Appendix \ref{appen1}.
 
 \section{Yocto Project}
 
-The core of the Petalinux tool is the Yocto SDK, an open-source community project that allows to create custom Linux-based systems for embedded products, independent of the hardware architecture. It consists of a flexible toolset and a development environment, allowing software customizations and build interchange for multiple hardware platforms as well as maintainable and scaled software stack.
+The core of the Petalinux tool is the Yocto SDK, an open-source community project that allows to
+create custom Linux-based systems for embedded products, independent of the hardware architecture.
+It consists of a flexible toolset and a development environment, allowing software customizations
+and build interchange for multiple hardware platforms as well as maintainable and scaled software
+stack.
 
 \begin{figure}[htp]
 	\centering
@@ -60,9 +74,14 @@ The core of the Petalinux tool is the Yocto SDK, an open-source community projec
 
 \subsection{Layer Model}
 
-The Yocto development model defines a layered structure, as repositories that contain configurations and instructions for the OpenEmbedded build system to know what and how to build the system. The layer model allows to logically separate information in the build. If a layer needs to specify in another layer, a recipe defined in a BitBake append (\texttt{.bbapend}) file.
+The Yocto development model defines a layered structure, as repositories that contain configurations
+and instructions for the OpenEmbedded build system to know what and how to build the system. The
+layer model allows to logically separate information in the build. If a layer needs to specify in
+another layer, a recipe defined in a BitBake append (\texttt{.bbapend}) file.
 
-The common recommended workflow is based on a reference distribution (\textit{Poky}), which contains the OpenEmbedded build system and the set of metadata necessary to start building the IoT distribution.
+The common recommended workflow is based on a reference distribution (\textit{Poky}), which contains
+the OpenEmbedded build system and the set of metadata necessary to start building the IoT
+distribution.
 
 \begin{figure}[htp]
 	\centering
@@ -72,7 +91,9 @@ The common recommended workflow is based on a reference distribution (\textit{Po
 
 \subsection{OpenEmbedded Build System Workflow}
 
-The expected workflow can be represented in figure \ref{fig:yocto-workflow}, where the different actors are identified as well as the expected outputs. This process can be shortly summarized as follows:
+The expected workflow can be represented in figure \ref{fig:yocto-workflow}, where the different
+actors are identified as well as the expected outputs. This process can be shortly summarized as
+follows:
 
 \begin{enumerate}
 	\item Specify architecture, policies, patches and configurations.
@@ -92,11 +113,23 @@ The expected workflow can be represented in figure \ref{fig:yocto-workflow}, whe
 
 \section{Boot Up Sequence}
 
-The embedded Linux built for this project requires a non-standard boot up flow, as the Znyq7 XC7Z010 chip has not enough MIO pins for the hardware that would allow the first boot read from an SD card reader. Therefore, a custom boot up sequence was needed. Additional, the board model was discovered to be a non-standar model (the typical model for the TE0726 includes 512MB of DDR3 RAM memory, whereas the model used is a 128 MB version), which created difficulties to find suitable documentation for this specific hardware configuration.
+The embedded Linux built for this project requires a non-standard boot up flow, as the Znyq7 XC7Z010
+chip has not enough MIO pins for the hardware that would allow the first boot read from an SD card
+reader. Therefore, a custom boot up sequence was needed. Additional, the board model was discovered
+to be a non-standar model (the typical model for the TE0726 includes 512MB of DDR3 RAM memory,
+whereas the model used is a 128 MB version), which created difficulties to find suitable
+documentation for this specific hardware configuration.
 
-The process is detailed in the Appendix \ref{appen1}. As a general rule, the hardware definition for the PS needs to be done via a reference design project provided by the manufacturer using prepared scripts, as opposed to the usual Xilinx workflow where a user-defined board should provide a TCL preset file with the necessary configuration values for the IP Core.
+The process is detailed in the Appendix \ref{appen1}. As a general rule, the hardware definition for
+the PS needs to be done via a reference design project provided by the manufacturer using prepared
+scripts, as opposed to the usual Xilinx workflow where a user-defined board should provide a TCL
+preset file with the necessary configuration values for the IP Core.
 
-Once the hardware has been correctly defined and exported, the Linux image build process needs to consider also the special configuration for the 128 MB memory capacity, which proved to be still a process with several iterations needed as the documentation and support is limited in terms of the manufacturer capabilities. The configuration also needs to define the boot process to the specific Zynq hardware configuration.
+Once the hardware has been correctly defined and exported, the Linux image build process needs to
+consider also the special configuration for the 128 MB memory capacity, which proved to be still a
+process with several iterations needed as the documentation and support is limited in terms of the
+manufacturer capabilities. The configuration also needs to define the boot process to the specific
+Zynq hardware configuration.
 
 \subsection{Linux Boot}
 
@@ -111,13 +144,20 @@ Once the hardware has been correctly defined and exported, the Linux image build
 \begin{enumerate}
 	\item Power up of the board starts.
 	\item The BOOT.BIN binary is read from flash memory through QSPI and run.
-	\item From this binary, the First Stage Boot Loader is then loaded, which will configure the PS and PL, and then locate and load the u-boot into DDR memory.
+	\item From this binary, the First Stage Boot Loader is then loaded, which will configure the PS
+	and PL, and then locate and load the u-boot into DDR memory.
 	\item U-boot will initialize the hardware, and then unpack and load the linux kernel.
 	\item Once the kernel is loaded into the high memory, specific hardware setup is run.
 	\item When kernel is ready, the first user-space application (\textit{init}) can start.
 \end{enumerate}
 
-The specific process for the Zynqbery 726 board used in the project needs special considerations that are hardware-related. In general, the workflow provided by Xilinx needs to be slighltly modified, and use the board manufacturer documentation and scipts. This is due to the fact that the board uses specific hardware, and the documentation provided does not match. Once the image (and other relevant binary files) have been correctly build, special care needs to be taken to generate the BOOT.BIN file for the stage-0 boot process. More detailed instructions are provided in Appendix \ref{appen1}.
+The specific process for the Zynqbery 726 board used in the project needs special considerations
+that are hardware-related. In general, the workflow provided by Xilinx needs to be slighltly
+modified, and use the board manufacturer documentation and scipts. This is due to the fact that the
+board uses specific hardware, and the documentation provided does not match. Once the image (and
+other relevant binary files) have been correctly build, special care needs to be taken to generate
+the BOOT.BIN file for the stage-0 boot process. More detailed instructions are provided in Appendix
+\ref{appen1}.
 
 Once the image (and other relevant binary files) has been correctly build, special care needs to 
 

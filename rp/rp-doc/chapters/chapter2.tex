@@ -4,7 +4,9 @@
 
 \chapter{Hardware Platform Design}
 
-The workflow for the Zynq-7000 architecture starts with the hardware specification for both PS and PL technologies. Xilinx provide a complete suite of programs and tools for the entire desing cycle of the embedded solution, either in a standalone platform or in an embedded OS.
+The workflow for the Zynq-7000 architecture starts with the hardware specification for both PS and
+PL technologies. Xilinx provide a complete suite of programs and tools for the entire desing cycle
+of the embedded solution, either in a standalone platform or in an embedded OS.
 
 \begin{figure}[htp]
 	\centering
@@ -12,23 +14,33 @@ The workflow for the Zynq-7000 architecture starts with the hardware specificati
 	\caption{Embedded Design Process Flow, from \cite{UG1043}.} \label{fig:embedded-flow}
 \end{figure}%
 
-The workflow is split into different tools provided by Xilinx. The hardware specific tasks will be covered in section \ref{hardware-design}. The software component will be covered in chapters \ref{embedded-linux} and \ref{software-application}.
+The workflow is split into different tools provided by Xilinx. The hardware specific tasks will be
+covered in section \ref{hardware-design}. The software component will be covered in chapters
+\ref{embedded-linux} and \ref{software-application}.
 
 \section{Hardware Design} \label{hardware-design}
 
-For the definition, configuration and flashing of the FPGA fabric, the Vivado Design Suite includes the necessary tools. The distribution of tasks and their respective tool scenario is shown in figure \ref{fig:hardware-tasks-tools}.
+For the definition, configuration and flashing of the FPGA fabric, the Vivado Design Suite includes
+the necessary tools. The distribution of tasks and their respective tool scenario is shown in figure
+\ref{fig:hardware-tasks-tools}.
 
 \begin{figure}[htp]
 	\centering
 	\includegraphics[width=\textwidth]{hardware-tasks-tools.png}
-	\caption{Hardware design tasks and tools scenario, from \cite{UG1043}.} \label{fig:hardware-tasks-tools}
+	\caption{Hardware design tasks and tools scenario, from \cite{UG1043}.}
+	\label{fig:hardware-tasks-tools}
 \end{figure}%
 
-The typical Hardware/Software Co-Design present in the tools allows a continuous verification and validation of the design. For this project, the process include a third element for building a custom Linux OS, which will be covered in chapter \ref{embedded-linux}. There are several approaches to create a hardware definition for the Zynqberry board in the Vivado Desgin Suite, a GUI-based interaction, or a TCL console.
+The typical Hardware/Software Co-Design present in the tools allows a continuous verification and
+validation of the design. For this project, the process include a third element for building a
+custom Linux OS, which will be covered in chapter \ref{embedded-linux}. There are several approaches
+to create a hardware definition for the Zynqberry board in the Vivado Desgin Suite, a GUI-based
+interaction, or a TCL console.
 
 \subsection{Vivado GUI}
 
-The process for a Zynq-7000 device can be easily done in the Vivado GUI, under Windows or Linux operative systems. The general procedure can be listed as follows:
+The process for a Zynq-7000 device can be easily done in the Vivado GUI, under Windows or Linux
+operative systems. The general procedure can be listed as follows:
 
 \begin{enumerate}
 	\item Start the Vivado IDE.
@@ -42,7 +54,8 @@ The process for a Zynq-7000 device can be easily done in the Vivado GUI, under W
 	\item Create New Block Design.
 	\item Add the IP Core for the ZYNQ7 Processing System.
 	\item Configure the desired characteristics of the PS and PL.
-	\item If necessary, add additional IP Cores, or create own IP Core with HLS (See Appendix \ref{appen2}).
+	\item If necessary, add additional IP Cores, or create own IP Core with HLS (See Appendix
+	\ref{appen2}).
 	\item Run the Block Automation or Connection Automation if required.
 	\item Validate the Block Design.
 	\item If necessary, assign the required constraints.
@@ -50,15 +63,29 @@ The process for a Zynq-7000 device can be easily done in the Vivado GUI, under W
 	\item Export the Hardware Platform (including Bitstream).
 \end{enumerate}
 
-The general process can contain small variances depending on the specific design. From this point, the software design can be started, by using the exported hardware definition into the SDK. This part is expanded in chapter \ref{software-application}.
+The general process can contain small variances depending on the specific design. From this point,
+the software design can be started, by using the exported hardware definition into the SDK. This
+part is expanded in chapter \ref{software-application}.
 
 \subsection{TCL Console}
 
-The entire process made in Vivado GUI can be performed in a TCL console by using text-based scripts. This makes some environments more adequate for maintainability and expandability, and even facilitates the use of VCS tools by having the hardware definition described in a text file.
+The entire process made in Vivado GUI can be performed in a TCL console by using text-based scripts.
+This makes some environments more adequate for maintainability and expandability, and even
+facilitates the use of VCS tools by having the hardware definition described in a text file.
 
-The Vivado core has included a TCL engine, which has been used as an industry standar choice for scripting and automating software tasks. For a project created using the GUI, actions are displayed as TCL commands in the TCL console, and the commands are saved in a file \texttt{vivado.jou} and together with the returned messages in the file \texttt{vivado.log}. A typical project creation script is shown in snippet \ref{tcl-script}.
+The Vivado core has included a TCL engine, which has been used as an industry standar choice for
+scripting and automating software tasks. For a project created using the GUI, actions are displayed
+as TCL commands in the TCL console, and the commands are saved in a file \texttt{vivado.jou} and
+together with the returned messages in the file \texttt{vivado.log}. A typical project creation
+script is shown in snippet \ref{tcl-script}.
 
-\begin{lstlisting}[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2, commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray}, morekeywords={create_project, add_files, import_files, set_property, update_compile_order, launch_runs, wait_on_run, open_run, report_timming_summary, report_power}, breaklines=true, numbers=left, float=htb, caption={TCL project creation example, from \ref{UG895}}, label={tcl-script}]
+\begin{lstlisting}[language=tcl, basicstyle=\scriptsize\ttfamily, tabsize=2,
+	commentstyle=\color{darkgray}, keywordstyle=\color{blue}, backgroundcolor=\color{lightgray},
+	morekeywords={create_project, add_files, import_files, set_property, update_compile_order,
+	launch_runs, wait_on_run, open_run, report_timming_summary, report_power}, breaklines=true,
+	numbers=left, float=htb,
+	caption={[TCL project creation example]TCL project creation example, from \cite{UG895}},
+	label={tcl-script}]
 	# Typical usage: vivado -mode tcl -source run_bft_project.tcl
 	# Create the project and directory structure
 	create_project -force project_bft_batch ./project_bft_batch -part xc7z010-clg225-1
