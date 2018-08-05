@@ -141,6 +141,14 @@ Zynq hardware configuration.
 
 \subsection{Zynq Boot}
 
+The specific process for the Zynqbery 726 board used in the project needs special considerations
+that are hardware-related. In general, the workflow provided by Xilinx needs to be slighltly
+modified, and use the board manufacturer documentation and scipts. This is due to the fact that the
+board uses specific hardware, and the documentation provided does not match, as the Zynqberry
+hardware cannot direct boot from the SD card reader. Once the image (and other relevant binary
+files) have been correctly build, special care needs to be taken to generate the BOOT.BIN file for
+the stage-0 boot process. More detailed instructions are provided in Appendix \ref{appen1}.
+
 \begin{enumerate}
 	\item Power up of the board starts.
 	\item The BOOT.BIN binary is read from flash memory through QSPI and run.
@@ -151,14 +159,16 @@ Zynq hardware configuration.
 	\item When kernel is ready, the first user-space application (\textit{init}) can start.
 \end{enumerate}
 
-The specific process for the Zynqbery 726 board used in the project needs special considerations
-that are hardware-related. In general, the workflow provided by Xilinx needs to be slighltly
-modified, and use the board manufacturer documentation and scipts. This is due to the fact that the
-board uses specific hardware, and the documentation provided does not match. Once the image (and
-other relevant binary files) have been correctly build, special care needs to be taken to generate
-the BOOT.BIN file for the stage-0 boot process. More detailed instructions are provided in Appendix
-\ref{appen1}.
+\section{Xilinx Linux embedded OS}
 
-Once the image (and other relevant binary files) has been correctly build, special care needs to 
+In order to have a runnable Linux OS, the building process in Petalinux SDK needs to configure the
+kernel and the RootFS, as the default configuration expects a standard boot from SD card for the
+entire sequence. Also, a memory offset parameter needs to be adjusted for the 128MB RAM memory size.
 
-% TODO: Complete topic
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.5\textwidth]{boot-img-source-config.png}
+	\caption{Configuration of BOOT image source in Petralinux kernel config.}
+	\label{fig:boot-img-source-config}
+\end{figure}
+
