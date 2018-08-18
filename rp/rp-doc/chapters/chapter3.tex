@@ -68,7 +68,7 @@ stack.
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{yocto-project-block.png}
+	\includegraphics[width=0.7\textwidth]{yocto-project-block.png}
 	\caption{Yocto Project structure, from \cite{yocto-manual}.} \label{fig:yocto-project-block}
 \end{figure}
 
@@ -85,7 +85,7 @@ distribution.
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{yocto-poky.png}
+	\includegraphics[width=0.7\textwidth]{yocto-poky.png}
 	\caption{Content of a typical Poky repository, from \cite{yocto-manual}.} \label{fig:yocto-poky}
 \end{figure}
 
@@ -107,7 +107,7 @@ follows:
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{yocto-workflow.png}
+	\includegraphics[width=0.7\textwidth]{yocto-workflow.png}
 	\caption{Default Build System workflow, from \cite{yocto-manual}.} \label{fig:yocto-workflow}
 \end{figure}
 
@@ -135,7 +135,7 @@ Zynq hardware configuration.
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{linux-boot.png}
+	\includegraphics[width=0.6\textwidth]{linux-boot.png}
 	\caption{Stages of a Linux boot process, from \cite{Crokett2014}.} \label{fig:linux-boot}
 \end{figure}
 
@@ -167,8 +167,55 @@ entire sequence. Also, a memory offset parameter needs to be adjusted for the 12
 
 \begin{figure}[htp]
 	\centering
-	\includegraphics[width=0.5\textwidth]{boot-img-source-config.png}
+	\includegraphics[width=0.7\textwidth]{boot-img-source-config.png}
 	\caption{Configuration of BOOT image source in Petralinux kernel config.}
 	\label{fig:boot-img-source-config}
 \end{figure}
 
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{boot-img-rootfs.png}
+	\caption{Configuration of rootfs type in Petralinux kernel config.}
+	\label{fig:boot-img-rootfs}
+\end{figure}
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{boot-img-offset.png}
+	\caption{Configuration of memory offset Petralinux kernel config.}
+	\label{fig:boot-img-source-offset}
+\end{figure}
+
+Once the kernel has been configured, the build can be started. This process is high CPU consuming,
+and depending on the host, can take several minutes. After succesful completion, the built image
+will be located in \texttt{petalinuxFolder/images/linux}. For this project, only the OS image
+(\texttt{image.ub}) and the FSBL application (\texttt{u-boot.elf}) are relevant.
+
+With help of the Xilinx XDK utility, the \texttt{BOOT.BIN} file can be created, by means of the
+FPGA bitstream and the FSBL application. There is also a TCL script from the board manufacturer that
+performs the binary creation and the programming to the FLASH chip memory. It should be noted that
+in case of a specific non-default functionality expected from the FSBL, the compiled
+\texttt{u-boot.elf} will not work for flash programming, as Vivado uses a specific setting that
+cannot be fullfiled with the tools. Manufacturer provides a precompiled default version of FSBL for
+programming, otherwise a special project with hardware tricks need to be created for the FSBL
+generation only.
+
+The SD card for the OS should be formatted as follows:
+
+\begin{itemize}
+	\item First partition - ~ 512 MB - FAT32
+	\item Second partition - Rest of space - EXT2 or EXT4
+\end{itemize}
+
+The OS image will be located in the first partition. The desired FileSystem will be located into the
+second partition (ensuring that space is enough for it). For this project, an Ubuntu 16.04 LTS
+File System is used.
+
+With the flash programmed and the SD correctly loaded, the boot process can be started. For testing
+purposes, a serial console is opened through the port that the Xilinx driver creates for the board,
+with Baud rate of 115200 bps and default bits of start/stop. Once the boot has been validated, the
+IP address assigned to the device can be checked (with \texttt{ifconfig}) and an ssh connection can
+be performed (ssh should be by default included in the OS, otherwise it can be installed with
+\texttt{apt}).
+
+% TODO: Include boot screenshot
