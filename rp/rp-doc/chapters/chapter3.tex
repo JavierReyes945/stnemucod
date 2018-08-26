@@ -211,11 +211,26 @@ The OS image will be located in the first partition. The desired FileSystem will
 second partition (ensuring that space is enough for it). For this project, an Ubuntu 16.04 LTS
 File System is used.
 
-With the flash programmed and the SD correctly loaded, the boot process can be started. For testing
-purposes, a serial console is opened through the port that the Xilinx driver creates for the board,
-with Baud rate of 115200 bps and default bits of start/stop. Once the boot has been validated, the
-IP address assigned to the device can be checked (with \texttt{ifconfig}) and an ssh connection can
-be performed (ssh should be by default included in the OS, otherwise it can be installed with
-\texttt{apt}).
+With the flash programmed and the SD correctly loaded, the boot process can be started, as shown in
+figure \ref{fig:boot-start}. For testing purposes, a serial console is opened through the port
+that the Xilinx driver creates for the board, with Baud rate of 115200 bps and default bits of
+start/stop. Once the boot has been validated, the IP address assigned to the device can be checked
+(with \texttt{ifconfig}) and an ssh connection can be performed (ssh should be by default included
+in the OS, otherwise it can be installed with \texttt{apt}).
 
-% TODO: Include boot screenshot
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{boot-start.png}
+	\caption{Start of the boot up process in the Zynqberry board.}
+	\label{fig:boot-start}
+\end{figure}
+
+The login user has been renamed for more comprehensive usage, as shown in figure 
+\ref{fig:boot-login}.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{boot-login.png}
+	\caption{User logged into the Ubuntu 16.04.4 LTS Zynqberry.}
+	\label{fig:boot-login}
+\end{figure}
