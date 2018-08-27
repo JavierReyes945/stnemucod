@@ -1,0 +1,30 @@
+@startuml
+start
+
+:validate argument;
+
+:create socket;
+if (socketCreated?) then (no)
+    stop
+endif
+
+:config sockAddress;
+:bind socket to port;
+if (socketBinded?) then (no)
+    stop
+endif
+
+while (connection?) is (idle)
+    :wait;
+endwhile (connected)
+
+:get client address;
+:accept client;
+if (connectionOK?) then (no)
+    stop
+endif
+
+
+
+end
+@enduml
