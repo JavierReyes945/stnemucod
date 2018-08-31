@@ -24,7 +24,15 @@ if (connectionOK?) then (no)
     stop
 endif
 
+while (readData) is (not null)
+    :as;
+endwhile
 
+if (readData?) then (0)
+    :clientDisconnected;
+else (-1)
+    :errorReceived;
+endif
 
 end
 @enduml

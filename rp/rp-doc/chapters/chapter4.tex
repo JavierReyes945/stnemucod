@@ -13,9 +13,36 @@ built in the Xilinx SDK via the cross-compilers that Xilinx provide for the ARM7
 The program follows a simple principle, with a single thread execution, but can be expanded with a
 thread definition for the handling of the hardware control.
 
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{activity-diag-eth.png}
+	\caption{Activity diagram for server application in Zynqberry.}
+	\label{fig:activity-diag-eth}
+\end{figure}
 
-\section{Dependencies}
+Given the expected workflow for developing Linux applications for a Zynq device, the application
+should be included in the image building process (with the
+\texttt{petalinux-create -t apps --name myApp}), so that it can be installed properly in the system.
+The previous workflow expects an INITRAMFS, which is not the case we used. Therefore, we had to
+manually copy the application executable into the rootfs of the Zynqberry. The simplest way is to
+use \texttt{scp} command with the Zynqberry connected to the local network.
 
-\section{Output}
+As mentioned in chapter \ref{chapter1}, the Zynqberry device should be able to receive a video
+stream from the Cam Controller device. Is it then necessary that the application acted as a server,
+for the client application that was developed for the Cam Controller device, and described in
+\cite{Poliakov2018}.
+
+\section{CAN Communication}
+
+As the communication with the rest of the devices is performed via CAN, the image was built with the
+CAN module kernel enabled. The usage of the CAN device is still in debug state, as the recommended
+flow is to use the CANutils device drivers, available from the apt repositories for the Xilinx
+Linux, but this has not worked as expected. It should be noted that the Standalone usage of the CAN
+module in the Zynqberry works flawlessly, and that the material presented by Xilinx related to
+the usage of CAN in the Linux image is contradictory to the configuration present in the petalinux
+template provided by the manufacturer.
+
+\section{Memory maped FPGA registers}
+
 
 % TODO: Complete chapter
