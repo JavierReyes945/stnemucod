@@ -141,10 +141,39 @@ The design of the hardware portion of the system can be considered in itself a p
 complexity of it would make this work out of focus. Therefore, an overview of the tool capabilities
 and procedures related is presented.
 
+The expected designed intended to use the AXI DMA IP Core module provided by Xilinx, which allows to
+transfer data from the system memory into any AXI4-Stream-based IP Core.
 
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{zynq-memory-mapped-axi.png}
+	\caption{Described configuration for data transfer between PS and PL, from \cite{UG1046}.}
+	\label{fig:zynq-memory-mapped-axi}
+\end{figure}
+
+The AXI DMA shall be connected to the processor as shown in figure \ref{fig:fpga-dma-diag}. The
+module is controlled by the processor by the General Purpose AXI GP0 port through AXI-Lite protocol.
+The data itself shall be transfered through the High Performance AXI HP0 through the
+MemoryMap2Stream MM2S and S2MM ports in the DMA.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{fpga-dma-diag.png}
+	\caption{PL design for DMA usage in Zynq.}
+	\label{fig:fpga-dma-diag}
+\end{figure}
+
+The final application was still not able to run, due to problems with the address configuration for
+the mapping in Linux embedded, as the documentation and examples are contemplated for standalone
+implementations, where the memory space can be directly controlled by the user application.
+
+In our case, the OS will need to define a block segment out of the kernel space in order to be able
+to read/write to that section by passing the address directly to the DMA control register. This
+modification in the predefined Petalinux project has proven to be of higer complexity, and still not
+working as desired.
 
 % TODO: Complete chapter
 
 \subsection{IP Core}
 
-\subsection{High Level Synthesis}
+
