@@ -2,10 +2,10 @@
 %  File: chapter2.tex
 %  Project: rp-doc
 %  Author: Javier Reyes
-%  Created on: 08.09.2018
+%  Created on: 09.09.2018
 %  
-%  Last modified: 08.09.2018
-%  Modified by: Javier Reyes (javier.reyes.g@gmail.com)
+%  Modified By: Javier Reyes (javier.reyes.g@gmail.com)
+%  Last Modified: 09.09.2018
 %  
 %  MIT License
 %  
@@ -33,7 +33,7 @@
 \chapter{Hardware Platform Design}
 
 The workflow for the Zynq-7000 architecture starts with the hardware specification for both PS and
-PL technologies. Xilinx provide a complete suite of programs and tools for the entire desing cycle
+PL technologies. Xilinx provide a complete suite of programs and tools for the entire design cycle
 of the embedded solution, either in a standalone platform or in an embedded OS.
 
 \begin{figure}[htp]
@@ -62,8 +62,8 @@ the necessary tools. The distribution of tasks and their respective tool scenari
 The typical Hardware/Software Co-Design present in the tools allows a continuous verification and
 validation of the design. For this project, the process include a third element for building a
 custom Linux OS, which will be covered in chapter \ref{embedded-linux}. There are several approaches
-to create a hardware definition for the Zynqberry board in the Vivado Desgin Suite, a GUI-based
-interaction, or a TCL console.
+to create a hardware definition for the Zynqberry board in the Vivado Desgin Suite, either a
+GUI-based interaction, or a TCL console.
 
 \subsection{Vivado GUI}
 
@@ -163,7 +163,7 @@ script is shown in snippet \ref{tcl-script}.
 	#start_gui
 \end{lstlisting}
 
-\section{Block Design}
+\section{Block Design} \label{block-design}
 
 The design of the hardware portion of the system can be considered in itself a project, and the
 complexity of it would make this work out of focus. Therefore, an overview of the tool capabilities
@@ -200,7 +200,42 @@ to read/write to that section by passing the address directly to the DMA control
 modification in the predefined Petalinux project has proven to be of higer complexity, and still not
 working as desired.
 
-\subsection{IP Core}
+\subsection{Custom IP Core}
 
-% TODO: Complete chapter
+Once the hardware design has been able to move data back and forth between the PS and PL logic, a
+user-defined IP block nneds to be included, which shall provide the main parallel execution in the
+FPGA section of the Zynq. As explained in \ref{block-design}, the functionality of this design is
+still Work In Progress, as the challenge of manage memory sections in a Linux OS environment is
+quite complex. We present the workflow for this task as documentation and support for future work.
 
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{custom-ip-workflow.png}
+	\caption{Custom IP Package workflow, from \cite{UG1118}.}
+	\label{fig:custom-ip-workflow}
+\end{figure}
+
+The User-defined IP Core can be packed with the IP Packager in Vivado. The methodology for packaging
+sources into a functional IP block are detailed in \cite{UG1118}. The way Vivado works with a custom
+IP inside the main project can be quite complex and not well documented, so it is recommended (by
+the author of this work) that the design is first created, tested and packed in a standalone
+project, and then the sources used in the main project to pack the final Custom IP block.
+
+The general idea is that an IP package contains a block design (which is an internal representation
+format of a logic hardware design). For the custom IP to be used from the PS, the AXI protocol needs
+to be used for the access to the registers. This can be selected in the custom IP wizard, which
+allows to select to pack a design from defined source files, either from a specific directory or
+from the current project directory, or a pack of a complete AXI4 peripheral (which includes IP
+logic, drivers, testbenches and debug options). The workflow gets highly complex when the AXI
+potocol comes into use, which is one of the reasons of the incomplete result of this work.
+
+\begin{figure}[htp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ip-package-options.png}
+	\caption{Custom IP Package init options, from \cite{UG1118}.}
+	\label{fig:ip-package-options}
+\end{figure}
+
+Once the IP has been packed, it can be added to the main Block Design, and included into the PL
+bitstream for the Zynq device. The objective result conclusions from this experience are detailed in
+chapter \ref{conclusions}.
