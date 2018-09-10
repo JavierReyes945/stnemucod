@@ -1,11 +1,11 @@
 %%%
 %  File: chapter5.tex
 %  Project: rp-doc
-%  Author: Javier Reyes
-%  Created on: 08.09.2018
+%  Author: Javier Reyes (javier.reyes.g@gmail.com)
+%  Created on: 10.09.2018
 %  
-%  Modified By: Javier Reyes (javier.reyes.g@gmail.com)
-%  Last Modified: 09.09.2018
+%  Modified By: Javier Reyes
+%  Last Modified: 10.09.2018
 %  
 %  MIT License
 %  
@@ -30,6 +30,90 @@
 %  SOFTWARE.
 %%%
 
-\chapter{Conclusions} \label{conlusions}
+\chapter{Conclusions} \label{conclusions}
 
-% TODO: Complete chapter
+In any academical project there are common elements for a good methodology of preparation and
+execution. During this time, one of the most important elements was the definition of the scope, and
+the requirements specification, in relation to the expected outcome. From the chapter \ref{chapter1}
+was clear that the DAEbot project involves several functional requirements that condition and/or
+shape the entire workflow. As this work started from the result of the New Trends in Research
+\cite{ntr}, there was a (now evident) lack of planning, definition of realist requirements, and in
+general, a more elaborated methodology that could have allowed to realize from an early stage most
+of the challenges, technical dificulties, and limitations of time, resources or expertise. In terms
+of the sequence followed in this project, we can present the conclusions in a format that helps to
+fix the present issues, and to complete the goal of the Operator Accelerator Plus.
+
+For a project like DAEbot, it is imperative that the learning sequence for the Zynq architecture is
+followed, as the product is well suited for highly complex solutions, and an undergrad student might
+not be aware of the technical challenges and knowledge that is to be expected for this type of
+product.
+
+On that idea, it is recommended to follow a Spiral flow of execution, in which each iteration
+includes a small phase of requirements specification, simple and concise to understand, model,
+implement and validate. The work done during the New Trends in research was, in fact, a combination
+of an introduction to the hardware, plus a perihperal driver project. Those are two clear iterations
+in the process. From there, other peripherals can be handled as individual projects, all under
+standalone configuration, as the implementation and validation involves a set of skills and tools
+that are common to a student. For the DAEbot, some recommended practices are:
+
+\begin{enumerate}
+    \item General PS usage, input and output from serial interface.
+    \item PS I/O peripheral modules configuration and usage (SPI, I2C, CAN, USB).
+    \item More complex software usage, custom drivers for previous peripheral, portable drivers
+    design, performance and optimization.
+    \item Memory management, DMA peripheral, and multidimensional data handling.
+    \item Static image processing, management, formats, file handlers.
+    \item Hardware Block Design, PL bitstream programming, RTL to gate level, testbench and
+    simulation.
+    \item AXI4 Lite protocol, simple register mapping to PS, IP Packaging.
+    \item AXI4 Stream, FIFOs, C thread programming, C memory manangement.
+    \item AXI4 High Performance, advanced IP configuration.
+    \item Sample default linux OS build process, with template software. Petalinux and Yocto usage.
+    Default FSBL, U-Boot, Kernel and Device Tree management.
+    \item Configuration of Device Tree, kernel modules inclusion, memory segmentation.
+    \item Linux programming, GNU/Clang developer tools, Linux rootfs and included libraries.
+    \item High resolution image handling, streams, C++ libraries (openCV).
+    \item Migration of standalone software to Linux libraries, Linux drivers, and kernel modules.
+    \item Socket programming, TCP/IP protocol, common resources management.
+\end{enumerate}
+
+From the most basic challenges that the Zynqberry board used in the project can rise, is the fact
+that the hardware is not well supported against the chip manufacturer (Xilinx Inc.). Get help from
+the typical sites and forums does not work well with the highly personalized workflow from Trenz
+Electronics, in which the documentation is mostly default behavior, and the scripts limit the
+possibility of experiment, verify and compare with others.
+
+The memory management in a device like the Zynq requires several steps and tests, as the memory
+controller release the programmer from some responsabilities, but introduces a new component with
+specific considerations, limitations and requirements. It is therefore necessary to handle the scope
+of the DMA once the programming of the device has already been achieved with a certain degree of
+confidence.
+
+The exchange format of data between the PS and PL can be in itself a project alone as the AXI
+format, even in its simpler mode (Lite, single data transfer up to 256 registers) has a high
+complexity. The recommended examples cannot be considered as a \textit{Hello World} program, as even
+the simple transfer of a data register requires the whole AXI signaling and handshake protocol to be
+clear. This usage was underestimated in this project, with extreme consequences in the time of the
+project, and could not even be included in the design, as the expected functionality required a data
+stream, which can only be assured with AXI stream.
+
+The process of building a linux distribution for Zynq architectures is still not well suited for
+small projects, as the typical documentation, examples and methodologies are designed to be used by
+a highly skilled Unix user, who is aware of several domain-specific concepts. The Unix/Linux
+environment is not so well introduced in the Master ESM program, so that it is required a decent
+time and effort to catch up with the necessary concepts and methods. Once ready, there is even an
+extra level of complexity, as the Yocto project (on which the Petalinux SDK relies) is in itself
+complex, but the Xilinx approach hides most of its workflow, making difficult to link the standard
+Yocto steps with the counterpart in Xilinx.
+
+As a final note, the Video processing topic has really interesting areas for a young student, but
+as far as the technological level in the multimedia industry, it is recommended to make an
+intermediate step in image processing. With this approach, the notions on streams, compresion,
+and formats for video are supported on a stable knowledge base, and the advance in the learning path
+can be progressive and evident. The theory of computer vision from the course in Master ESM is in
+itself at an introductorial level, and not enough for a Zynq application on image processing.
+
+The learning of this project on a personal level is not evident on a standard report, but on the
+time and effor to define, debug, validate, and finally realize that the initially expected outcome
+was not reachable under the terms of the module. It is, nonetheless, a walked path that might work
+as input for future processes in academical projects and real life professional projects.

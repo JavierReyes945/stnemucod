@@ -1,11 +1,11 @@
 %%%
 %  File: chapter4.tex
 %  Project: rp-doc
-%  Author: Javier Reyes
-%  Created on: 08.09.2018
+%  Author: Javier Reyes (javier.reyes.g@gmail.com)
+%  Created on: 09.09.2018
 %  
-%  Modified By: Javier Reyes (javier.reyes.g@gmail.com)
-%  Last Modified: 09.09.2018
+%  Modified By: Javier Reyes
+%  Last Modified: 10.09.2018
 %  
 %  MIT License
 %  
@@ -48,8 +48,8 @@ thread definition for the handling of the hardware control.
 	\label{fig:activity-diag-eth}
 \end{figure}
 
-Given the expected workflow for developing Linux applications for a Zynq device, the application
-should be included in the image building process (with the
+Given the expected estandard workflow for developing Linux applications for a Zynq device, the
+application should be included in the image building process (with the
 \texttt{petalinux-create -t apps --name myApp}), so that it can be installed properly in the system.
 The previous workflow expects an INITRAMFS, which is not the case we used. Therefore, we had to
 manually copy the application executable into the rootfs of the Zynqberry. The simplest way is to
@@ -60,19 +60,12 @@ stream from the Cam Controller device. Is it then necessary that the application
 for the client application that was developed for the Cam Controller device, and described in
 \cite{Poliakov2018}.
 
-In order to handle a hardware processing functionality in the PL part of the Zynq device, a driver
-module needs to be included, which provides the methods for read/write operations to the memory
-block that is mapped to the IP Core. This part is not shown in the diagram, as it is neither
-functional nor validated.
-
-\section{Memory maped FPGA registers}
-
-This section presents the expected design to be programmed into the PL part of the Zynq. It should
-be noted that the design is not yet validated, and is on test phase, as has proven to be difficult
-to make a DMA module to work.
-
-The estandar way to work with the PL is described in UGXXX. The logic is expressed with the use of
-predefined IP cores as blocks.
+In order to handle a hardware processing functionality in the PL part of the Zynq device, a IP core
+module needs to be included (as described in \ref{custom-ip-core}). This makes also necessary to add
+a software driver for the IP core handling, which provides the methods for read/write operations to
+the memory mapped registers of the IP Core. This part is not shown in the diagram, as it is neither
+functional nor validated. The documentation provided by Xilinx describes the usage of base functions
+in the BSP, but for standalone platform, which makes this part of the work more complex.
 
 \section{CAN Communication}
 
@@ -83,5 +76,3 @@ Linux, but this has not worked as expected. It should be noted that the Standalo
 module in the Zynqberry works flawlessly, and that the material presented by Xilinx related to
 the usage of CAN in the Linux image is contradictory to the configuration present in the petalinux
 template provided by the manufacturer.
-
-% TODO: Complete chapter
